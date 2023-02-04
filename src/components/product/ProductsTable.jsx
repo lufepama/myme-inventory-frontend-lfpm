@@ -12,8 +12,10 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import FilterInput from '../shared/FilterInput';
 import Button from '@mui/material/Button';
 import WidgetsIcon from '@mui/icons-material/Widgets';
-import { useProduct } from '../../hooks/useProduct'
+import Alert from '@mui/material/Alert';
+
 import { useModals } from '../../hooks/useModals';
+import { useProduct } from '../../hooks/useProduct';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -40,7 +42,10 @@ function createmyData(id, name, description, price) {
 export default function ProductsTable({ productList }) {
 
     const { handleOpenDeleteModal, handleOpenCreateProductModal } = useModals()
+    const { productStatus, onDeleteProduct, updateSelectedProduct } = useProduct()
     const [rows, setRows] = useState([])
+
+    const { isCreated, isDeleted } = productStatus
 
     const fillRows = () => {
         let tempRows = []
@@ -53,13 +58,10 @@ export default function ProductsTable({ productList }) {
 
     //TODO: Add temporal item
     const handleDeleteProduct = (product) => {
+        updateSelectedProduct(product)
+        onDeleteProduct()
         handleOpenDeleteModal()
     }
-
-    const handleCreateProduct = () => {
-        handleOpenCreateProductModal()
-    }
-
 
     useEffect(() => {
         fillRows()
@@ -74,42 +76,60 @@ export default function ProductsTable({ productList }) {
                 <Button
                     variant="contained"
                     endIcon={<WidgetsIcon />}
-                    onClick={() => handleCreateProduct()}
+                    onClick={() => handleOpenCreateProductModal()}
                 >
                     <span className='font-bold'>Add product</span>
                 </Button>
             </div>
-            <TableContainer component={Paper} className='mt-5'>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell>id</StyledTableCell>
-                            <StyledTableCell align="left">Name</StyledTableCell>
-                            <StyledTableCell align="left">Description</StyledTableCell>
-                            <StyledTableCell align="right">Price</StyledTableCell>
-                            <StyledTableCell align="right">Action</StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody className='bg-table-color'>
-                        {rows.map((row) => (
-                            <StyledTableRow key={row.id} className='bg-table-color'>
-                                <StyledTableCell >{row.id}</StyledTableCell>
-                                <StyledTableCell >{row.name}</StyledTableCell>
-                                <StyledTableCell >
-                                    {row.description}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">{row.price}</StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <FontAwesomeIcon
-                                        className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
-                                        onClick={() => handleDeleteProduct(row)}
-                                    />
-                                </StyledTableCell>
-                            </StyledTableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+
+            {
+                isCreated
+                    ? <Alert className='mt-5' severity="success">Product <span className='font-bold'>added</span> successfully</Alert>
+                    : null
+            }
+            {
+                isDeleted
+                    ? <Alert className='mt-5' severity="success">Product <span className='font-bold'>deleted</span> successfully</Alert>
+                    : null
+            }
+
+            <Paper sx={{
+                width: '100%', height: '100%',
+                overflowY: 'scroll', marginTop: '20px', scrollBehavior: 'auto',
+                overflowX: 'none'
+            }}>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                        <TableHead>
+                            <TableRow>
+                                <StyledTableCell>id</StyledTableCell>
+                                <StyledTableCell align="left">Name</StyledTableCell>
+                                <StyledTableCell align="left">Description</StyledTableCell>
+                                <StyledTableCell align="right">Price</StyledTableCell>
+                                <StyledTableCell align="right">Action</StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody className='bg-table-color'>
+                            {rows.map((row) => (
+                                <StyledTableRow key={row.id} className='bg-table-color'>
+                                    <StyledTableCell >{row.id}</StyledTableCell>
+                                    <StyledTableCell >{row.name}</StyledTableCell>
+                                    <StyledTableCell >
+                                        {row.description}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">{row.price}</StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        <FontAwesomeIcon
+                                            className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
+                                            onClick={() => handleDeleteProduct(row)}
+                                        />
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
         </>
     );
 }

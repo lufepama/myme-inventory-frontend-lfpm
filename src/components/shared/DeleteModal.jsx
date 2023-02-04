@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons'
 import { useModals } from '../../hooks/useModals';
 import Button from '@mui/material/Button';
+import { useProduct } from '../../hooks/useProduct';
 
 const style = {
     position: 'absolute',
@@ -19,9 +20,10 @@ const style = {
     p: 4,
 };
 
-const DeleteModal = () => {
+const DeleteModal = ({ product }) => {
 
     const { handleCloseDeleteModal, openDeleteModal } = useModals()
+    const { onDeleteProduct } = useProduct()
 
 
     return (
@@ -39,12 +41,12 @@ const DeleteModal = () => {
                             <h1 className='text-xl ml-4 font-semibold'>Delete product</h1>
                         </div>
                         <div className='p-2 flex flex-col'>
-                            <p className='text-lg'>Are you sure you want to delete :nameitem with and id of :id</p>
+                            <p className='text-lg'>Are you sure you want to delete {product?.name} with and id of {product?.id}</p>
                             <div className='flex flex-row-reverse mt-10'>
                                 <Button onClick={() => { handleCloseDeleteModal() }} style={{ marginLeft: '7px' }} variant="contained" color="primary">
                                     Cancel
                                 </Button>
-                                <Button variant="outlined" color="error">
+                                <Button onClick={() => { onDeleteProduct() }} variant="outlined" color="error">
                                     Delete
                                 </Button>
                             </div>

@@ -2,14 +2,21 @@ import React, { useEffect, useContext } from 'react'
 import ProductContext from '../context/ProductContext'
 import { getProducts } from '../helper/product'
 import Cookies from 'js-cookie'
+import { createProduct, deleteProduct } from '../helper/product'
+import { useModals } from './useModals'
+
 
 export const useProduct = () => {
 
-    const { productList, setProductList } = useContext(ProductContext)
+    const { productList, setProductList,
+        productStatus, setProductStatus,
+        selectedProduct, setSelectedProduct
+    } = useContext(ProductContext)
+    const { handleCloseCreateProductModal, handleCloseDeleteModal } = useModals()
 
+    const csrftoken = Cookies.get('csrftoken')
 
     const fetchProducts = async () => {
-        const csrftoken = Cookies.get('csrftoken')
         if (csrftoken) {
             const res = await getProducts(csrftoken)
             if (res.success) {
@@ -18,8 +25,48 @@ export const useProduct = () => {
         }
     }
 
+    const onAddProduct = async (product) => {
+
+        if (csrftoken) {
+            const res = await createProduct(csrftoken, product)
+            if (res.success) {
+                const newProduct = res.data
+                setProductStatus({ isCreated: true, isDeleted: false })
+                setProductList([...productList, newProduct])
+                handleCloseCreateProductModal()
+            }
+        }
+    }
+
+    const onDeleteProduct = async () => {
+
+        if (csrftoken && Object.keys(selectedProduct).length != 0) {
+            const res = await deleteProduct(csrftoken, selectedProduct.id)
+            if (res.success) {
+                setProductStatus({ isCreated: false, isDeleted: true })
+                const filterdList = productList.filter(item => item.id != selectedProduct.id)
+                setProductList(filterdList)
+                handleCloseDeleteModal()
+            }
+        }
+    }
+
+    const updateSelectedProduct = (product) => {
+        setSelectedProduct(product)
+    }
+
+    const resetSelectedProduct = () => {
+        setSelectedProduct({})
+    }
+
     return {
         productList,
-        fetchProducts
+        productStatus,
+        selectedProduct,
+        fetchProducts,
+        onAddProduct,
+        onDeleteProduct,
+        updateSelectedProduct,
+        resetSelectedProduct
     }
 }

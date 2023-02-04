@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons'
 import TextField from '@mui/material/TextField';
 import { useModals } from '../../hooks/useModals';
+import { useProduct } from '../../hooks/useProduct';
 import Button from '@mui/material/Button';
 
 const style = {
@@ -23,21 +24,22 @@ const style = {
 const CreateProductModal = () => {
 
     const { openCreateProductModal, handleCloseCreateProductModal } = useModals()
+    const { onAddProduct } = useProduct()
     const [productData, setProductData] = useState({
         name: '',
         description: '',
-        price: null
+        price: 0
     })
     const { name, description, price } = productData
 
     const handleChange = (name) =>
         (event) => {
-            productData({ ...productData, [name]: event.target.value })
+            setProductData({ ...productData, [name]: event.target.value })
         };
 
 
     const handleProductCreate = () => {
-
+        onAddProduct(productData)
     }
 
 
@@ -75,16 +77,17 @@ const CreateProductModal = () => {
                                     <input
                                         type="number" required placeholder='Price ($)'
                                         name="price" min="0" value={price} step=".01"
+                                        onChange={handleChange('price')}
                                         className='bg-gray-200 mt-3 h-12 rounded-lg'
                                     />
                                 </div>
                             </div>
                             <div className='flex flex-row-reverse mt-10'>
-                                <Button onClick={() => { handleCloseCreateProductModal() }} style={{ marginLeft: '7px' }} variant="contained" color="primary">
+                                <Button style={{ marginLeft: '7px' }} onClick={() => { handleCloseCreateProductModal() }} variant="outlined" color="error">
                                     Cancel
                                 </Button>
-                                <Button variant="outlined" color="error">
-                                    Delete
+                                <Button onClick={() => handleProductCreate()} variant="contained" color="primary">
+                                    Add
                                 </Button>
                             </div>
                         </div>
