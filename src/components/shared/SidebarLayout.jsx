@@ -1,23 +1,26 @@
 import React from 'react'
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { faWarehouse } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faDollar } from '@fortawesome/free-solid-svg-icons'
-import { faArrowUpRightDots } from '@fortawesome/free-solid-svg-icons'
+import { faBoxOpen } from '@fortawesome/free-solid-svg-icons'
 import { faGear } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { faCircleChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { useProSidebar } from 'react-pro-sidebar'
 import { useAuth } from '../../hooks/useAuth';
-import Link from 'wouter'
+import logo from '../../assets/logo.png'
+import Link, { useLocation } from 'wouter'
 
 
 const SidebarLayout = ({ children }) => {
 
     const { collapseSidebar, collapsed } = useProSidebar()
     const { onLogout, fullName } = useAuth()
+    const [_, navigate] = useLocation()
+
 
     const handleCollapse = () => {
         collapseSidebar()
@@ -36,63 +39,51 @@ const SidebarLayout = ({ children }) => {
                                 />
                             </div>
                             <div className='flex flex-4 flex-col pt-8 mr-2 mt-10'>
-                                {/* <Image
-                                    src={'/images/logo.jpg'}
+                                <img
+                                    src={logo}
                                     width={100}
                                     height={100}
-                                    className='rounded-2xl ml-3'
+                                    className='rounded-3xl ml-3 cursor-pointer'
                                     alt='trading logo'
-                                    onClick={() => { router.push('/home') }}
-                                /> */}
+                                    onClick={() => { navigate('/home/') }}
+                                />
                                 <MenuItem
                                     className='mt-5'
-                                    icon={<FontAwesomeIcon className='text-white' icon={faUser} />}
+                                    icon={<FontAwesomeIcon className='text-white menu-icon-text' icon={faUser} />}
 
                                 >
-                                    <p className='font-semibold text-white'>{fullName.length > 0 ? fullName : 'Nombre de usuario'}</p>
+                                    <p className='font-semibold text-white menu-icon-text'>{fullName.length > 0 ? fullName : 'Nombre de usuario'}</p>
                                 </MenuItem>
                             </div>
                             <div className='flex-1 mt-12'>
+
                                 <MenuItem
-                                    icon={<FontAwesomeIcon className='text-white' icon={faHome} />}
+                                    icon={<FontAwesomeIcon className='text-white menu-icon-text' icon={faBoxOpen} />}
                                 // routerLink={<Link href='/home' />}
                                 >
-                                    <p className='font-semibold text-white'>Inicio</p>
+                                    <p className='font-semibold text-white menu-icon-text'>Products</p>
                                 </MenuItem>
                                 <MenuItem
-                                    icon={<FontAwesomeIcon className='text-white' icon={faDollar} />}
+                                    icon={<FontAwesomeIcon className='text-white menu-icon-text' icon={faWarehouse} />}
                                 // routerLink={<Link href='/strategies' />}
                                 >
-                                    <p className='font-semibold text-white'>Estrategias</p>
+                                    <p className='font-semibold text-white menu-icon-text'>Warehouses</p>
                                 </MenuItem>
-
-                                <MenuItem
-                                    icon={<FontAwesomeIcon className='text-white' icon={faArrowUpRightDots} />}
-                                // routerLink={<Link href='/market' />}
-                                >
-                                    <p className='font-semibold text-white'>Mercado</p>
-                                </MenuItem>
-
                             </div>
                             <div className='w-full'>
+
                                 <MenuItem
-                                    icon={<FontAwesomeIcon className='text-white' icon={faGear} />}
-                                // routerLink={<Link href='/configuration' />}
-                                >
-                                    <p className='font-semibold text-white'>Configuracion</p>
-                                </MenuItem>
-                                <MenuItem
-                                    icon={<FontAwesomeIcon className='text-white' icon={faArrowRightFromBracket} />}
+                                    icon={<FontAwesomeIcon className='text-white menu-icon-text' icon={faArrowRightFromBracket} />}
                                     onClick={() => onLogout()}
                                 >
-                                    <p className='font-semibold text-white'>Salir</p>
+                                    <p className='font-semibold text-white menu-icon-text'>Logout</p>
                                 </MenuItem>
                             </div>
                         </Menu>
                     </div>
 
                 </Sidebar>
-                <main className='bg-primary-color w-full h-full lg:p-10 sm:p-3 '>
+                <main className='bg-white w-full h-full lg:p-10 sm:p-3 '>
                     {children}
                 </main>
             </div>

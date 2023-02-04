@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <div className='w-full bg-primary-color h-20 py-2 px-8'>
             <div className='flex flex-row justify-between'>
-                <Link href='/home'>
+                <Link href='/home/'>
                     <img
                         src={logo}
                         width={100}

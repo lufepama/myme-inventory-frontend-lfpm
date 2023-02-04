@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .css-dip3t8 {
-    background-color: #323b5b !important;
+    background-color: #352A35 !important;
     border-right-width: 8px;
-    border-right-color: #3f4a72;
+    border-right-color: #2a212a;
 }
 
 .css-1bdadyq:hover {
@@ -46,4 +46,8 @@
 .css-10bey84-MuiSvgIcon-root-MuiNativeSelect-icon {
     color: white;
     margin-left: 2px;
+}
+
+.css-16jkw2k:hover .menu-icon-text {
+    color: black !important;
 }
