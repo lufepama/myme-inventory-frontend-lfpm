@@ -40,3 +40,7 @@
 .css-djpzgj-MuiTableRow-root:hover {
     background-color: #FCEBFC;
 }
+
+.create-prod-ware-container>.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    height: 32px;
+}

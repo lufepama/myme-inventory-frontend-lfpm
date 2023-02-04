@@ -7,7 +7,7 @@ import CreateProductModal from '../components/product/CreateProductModal'
 
 const Products = () => {
 
-    const { fetchProducts } = useProduct()
+    const { fetchProducts, productList } = useProduct()
 
     useEffect(() => {
         fetchProducts()
@@ -19,9 +19,7 @@ const Products = () => {
                 <DeleteModal />
                 <CreateProductModal />
                 <h1 className='font-bold text-3xl text-center'>Products</h1>
-                <div>
-                    <ProductsTable />
-                </div>
+                <ProductsTable productList={productList} />
             </div>
         </SidebarLayout>
     )

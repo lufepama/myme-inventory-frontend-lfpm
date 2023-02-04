@@ -7,11 +7,14 @@ const Context = createContext({})
 export const WarehouseProvider = ({ children }) => {
 
     const [warehouseList, setWarehouseList] = useState([])
-
+    const [productsWarehouseList, setProductsWarehouseList] = useState([])
+    const [selectedWarehouse, setSelectedWarehouse] = useState({})
 
     return (
         <Context.Provider value={{
-            warehouseList, setWarehouseList
+            warehouseList, setWarehouseList,
+            productsWarehouseList, setProductsWarehouseList,
+            selectedWarehouse, setSelectedWarehouse
         }} >
             {children}
         </Context.Provider>

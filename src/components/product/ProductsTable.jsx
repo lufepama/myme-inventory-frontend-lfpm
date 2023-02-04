@@ -37,9 +37,8 @@ function createmyData(id, name, description, price) {
 }
 
 
-export default function ProductsTable() {
+export default function ProductsTable({ productList }) {
 
-    const { productList } = useProduct()
     const { handleOpenDeleteModal, handleOpenCreateProductModal } = useModals()
     const [rows, setRows] = useState([])
 

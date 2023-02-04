@@ -1,12 +1,26 @@
 import React, { useContext } from 'react'
 import WarehouseContext from '../context/WarehouseContext'
 import Cookies from 'js-cookie'
-import { getWarehouses } from '../helper/warehouse'
+import { getProductsWarehouse, getWarehouses } from '../helper/warehouse'
 
 
 export const useWarehouse = () => {
 
-    const { warehouseList, setWarehouseList } = useContext(WarehouseContext)
+    const { warehouseList, setWarehouseList,
+        productsWarehouseList, setProductsWarehouseList,
+        selectedWarehouse, setSelectedWarehouse
+    } = useContext(WarehouseContext)
+
+    const fetchProductsWarehouse = async (warehouseId) => {
+        const csrftoken = Cookies.get('csrftoken')
+        if (csrftoken) {
+            const res = await getProductsWarehouse(warehouseId, csrftoken)
+            console.log(res)
+            if (res.success) {
+                setProductsWarehouseList(res.data)
+            }
+        }
+    }
 
     const fetchWarehouses = async () => {
         const csrftoken = Cookies.get('csrftoken')
@@ -18,8 +32,16 @@ export const useWarehouse = () => {
         }
     }
 
+    const updateSelectedWarehouse = (warehouse) => {
+        setSelectedWarehouse(warehouse)
+    }
+
     return {
         warehouseList,
-        fetchWarehouses
+        productsWarehouseList,
+        selectedWarehouse,
+        fetchWarehouses,
+        fetchProductsWarehouse,
+        updateSelectedWarehouse
     }
 }

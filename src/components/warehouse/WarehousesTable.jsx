@@ -42,7 +42,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function WarehousesTable() {
 
-    const { warehouseList } = useWarehouse()
+    const { warehouseList, updateSelectedWarehouse } = useWarehouse()
     const [_, navigate] = useLocation()
     const { handleOpenCreateWarehouseModal, handleOpenDeleteModal } = useModals()
     const [rows, setRows] = useState([])
@@ -66,6 +66,10 @@ export default function WarehousesTable() {
         handleOpenCreateWarehouseModal()
     }
 
+    const handleRedirect = (warehouse) => {
+        updateSelectedWarehouse(warehouse)
+        navigate('/warehouses/2/')
+    }
 
     useEffect(() => {
         fillRows()
@@ -107,17 +111,17 @@ export default function WarehousesTable() {
                         <TableBody className='bg-table-color'>
                             {rows.map((row) => (
                                 <StyledTableRow key={row.id} className='bg-table-color'>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => navigate('/home/')} align="left">
+                                    <StyledTableCell className='cursor-pointer' align="left">
                                         <Checkbox  {...label} />
                                     </StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => navigate('/home/')} >{row.id}</StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => navigate('/home/')} >{row.name}</StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => navigate('/home/')} >
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.id}</StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.name}</StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >
                                         {row.description}
                                     </StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => navigate('/home/')} align="left">{row.address}</StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => navigate('/home/')} align="center">{row.country}</StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => navigate('/home/')} align="right">{row.phoneNumber}</StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="left">{row.address}</StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="center">{row.country}</StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="right">{row.phoneNumber}</StyledTableCell>
                                     <StyledTableCell align="right">
                                         <FontAwesomeIcon
                                             className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}

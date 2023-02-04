@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Warehouses from './pages/Warehouses';
+import WarehouseDetail from './pages/WarehouseDetail';
 
 import { AuthenticationProvider } from './context/AuthenticationContext';
 import { ProSidebarProvider } from 'react-pro-sidebar';
@@ -24,6 +25,7 @@ const Routes = () => {
                                 <Route path='/home/' component={Home} />
                                 <Route path='/products/' component={Products} />
                                 <Route path='/warehouses/' component={Warehouses} />
+                                <Route path='/warehouses/:id/' component={WarehouseDetail} />
                                 <Route path='/login/' component={Login} />
                                 <Route path='/signup/' component={Signup} />
                             </Switch>
