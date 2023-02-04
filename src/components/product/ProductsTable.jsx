@@ -93,7 +93,7 @@ export default function ProductsTable({ productList }) {
             }
 
             <Paper sx={{
-                width: '100%', height: '100%',
+                width: '100%', height: 'auto',
                 overflowY: 'scroll', marginTop: '20px', scrollBehavior: 'auto',
                 overflowX: 'none'
             }}>
@@ -108,24 +108,31 @@ export default function ProductsTable({ productList }) {
                                 <StyledTableCell align="right">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody className='bg-table-color'>
-                            {rows.map((row) => (
-                                <StyledTableRow key={row.id} className='bg-table-color'>
-                                    <StyledTableCell >{row.id}</StyledTableCell>
-                                    <StyledTableCell >{row.name}</StyledTableCell>
-                                    <StyledTableCell >
-                                        {row.description}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="right">{row.price}</StyledTableCell>
-                                    <StyledTableCell align="right">
-                                        <FontAwesomeIcon
-                                            className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
-                                            onClick={() => handleDeleteProduct(row)}
-                                        />
-                                    </StyledTableCell>
-                                </StyledTableRow>
-                            ))}
-                        </TableBody>
+                        {
+                            !productList.length > 0
+                                ? <h1>No products found</h1>
+                                : (
+                                    <TableBody className='bg-table-color'>
+                                        {rows.map((row) => (
+                                            <StyledTableRow key={row.id} className='bg-table-color'>
+                                                <StyledTableCell >{row.id}</StyledTableCell>
+                                                <StyledTableCell >{row.name}</StyledTableCell>
+                                                <StyledTableCell >
+                                                    {row.description}
+                                                </StyledTableCell>
+                                                <StyledTableCell align="right">{row.price}</StyledTableCell>
+                                                <StyledTableCell align="right">
+                                                    <FontAwesomeIcon
+                                                        className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
+                                                        onClick={() => handleDeleteProduct(row)}
+                                                    />
+                                                </StyledTableCell>
+                                            </StyledTableRow>
+                                        ))}
+                                    </TableBody>
+                                )
+                        }
+
                     </Table>
                 </TableContainer>
             </Paper>
