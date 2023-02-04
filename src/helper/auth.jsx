@@ -28,3 +28,18 @@ export const login = async (data) => {
         .then((res) => { return res.json() })
         .catch((err) => { console.log(err) })
 }
+
+
+export const logout = async (token) => {
+
+    return fetch(`${API}/user/logout`, {
+        method: 'POST',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            'Authorization': `Token ${token}`
+        },
+    })
+        .then((res) => { return res.json() })
+        .catch((err) => { console.log(err) })
+}

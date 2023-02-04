@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import AuthenticationContext from '../context/AuthenticationContext'
 import { useRouter, useLocation } from 'wouter'
 import Cookies from 'js-cookie'
-import { signup, login } from '../helper/auth'
+import { signup, login, logout } from '../helper/auth'
 
 export const useAuth = () => {
 
@@ -31,11 +31,11 @@ export const useAuth = () => {
     const saveUserDataCookies = (data) => {
         Cookies.set('csrftoken', data.token)
         //If no name or lastname are set, we assign them default values
-        if (!data.name) data.name = 'Nombre de'
-        if (!data.apellidos) data.apellidos = 'Usuario'
+        if (!data.firstName) data.name = 'Nombre de'
+        if (!data.lastName) data.apellidos = 'Usuario'
         const data_json = {
-            name: data.name,
-            lastName: data.apellidos
+            name: data.firstName,
+            lastName: data.lastName
         }
         Cookies.set('usr', JSON.stringify(data_json))
     }
@@ -45,7 +45,6 @@ export const useAuth = () => {
         setIsLoginLoading(true)
         const res = await login(data)
         if (res.success) {
-            console.log('token->', res);
             saveUserDataCookies(res)
             setLoginStatus({ ...loginStatus, loginError: false, errorMessage: '' })
             // navigate('/home/')
@@ -75,33 +74,29 @@ export const useAuth = () => {
 
     //Delete the Cookie and user is redirected to login page
     const onLogout = async () => {
-        // if (csrftoken) {
-        //     const res = await logout(csrftoken)
-        //     console.log({ res })
-        //     if (res.success) {
-        //         Cookies.remove('csrftoken')
-        //         Cookies.remove('usr')
-        //         router.push('/login')
-        //     }
-        // }
+        const res = await logout(csrftoken)
+        if (res.success) {
+            Cookies.remove('csrftoken')
+            Cookies.remove('usr')
+            navigate('/login/')
+        }
     }
 
     //Format full name of user
-    //NOTE:Improve this
     const formatedUserFullname = () => {
-        // const usr_cke = Cookies.get('usr')
-        // if (usr_cke) {
-        //     const fullName = JSON.parse(Cookies.get('usr'))
-        //     const firstName = fullName.name
-        //     const lastName = fullName.lastName
-        //     const formatedFullname = `${firstName.charAt(0).toUpperCase()}${firstName.slice(1)} ${lastName.charAt(0).toUpperCase()}${lastName.slice(1)}`
-        //     setFullName(formatedFullname)
-        // }
+        const usr_cke = Cookies.get('usr')
+        if (usr_cke) {
+            const fullName = JSON.parse(Cookies.get('usr'))
+            const firstName = fullName.name
+            const lastName = fullName.lastName
+            const formatedFullname = `${firstName.charAt(0).toUpperCase()}${firstName.slice(1)} ${lastName.charAt(0).toUpperCase()}${lastName.slice(1)}`
+            setFullName(formatedFullname)
+        }
     }
 
-    // useEffect(() => {
-    //     formatedUserFullname()
-    // }, [])
+    useEffect(() => {
+        formatedUserFullname()
+    }, [])
 
 
     return {

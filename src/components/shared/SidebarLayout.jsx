@@ -50,22 +50,22 @@ const SidebarLayout = ({ children }) => {
                                 <MenuItem
                                     className='mt-5'
                                     icon={<FontAwesomeIcon className='text-white menu-icon-text' icon={faUser} />}
-
                                 >
                                     <p className='font-semibold text-white menu-icon-text'>{fullName.length > 0 ? fullName : 'Nombre de usuario'}</p>
                                 </MenuItem>
+
                             </div>
                             <div className='flex-1 mt-12'>
 
                                 <MenuItem
                                     icon={<FontAwesomeIcon className='text-white menu-icon-text' icon={faBoxOpen} />}
-                                // routerLink={<Link href='/home' />}
+                                    onClick={() => navigate('/products/')}
                                 >
                                     <p className='font-semibold text-white menu-icon-text'>Products</p>
                                 </MenuItem>
                                 <MenuItem
                                     icon={<FontAwesomeIcon className='text-white menu-icon-text' icon={faWarehouse} />}
-                                // routerLink={<Link href='/strategies' />}
+                                    onClick={() => navigate('/warehouses/')}
                                 >
                                     <p className='font-semibold text-white menu-icon-text'>Warehouses</p>
                                 </MenuItem>
