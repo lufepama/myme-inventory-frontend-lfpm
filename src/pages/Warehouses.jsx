@@ -11,8 +11,8 @@ import { useModals } from '../hooks/useModals'
 
 const Warehouses = () => {
 
-    const { fetchWarehouses } = useWarehouse()
-    const { handleOpenCreateDeleteProductWarehouseModal } = useModals()
+    const { selectedWarehouse, onDeleteWarehouse, fetchWarehouses, } = useWarehouse()
+    const { handleOpenCreateDeleteProductWarehouseModal, handleCloseDeleteModal } = useModals()
 
     useEffect(() => {
         fetchWarehouses()
@@ -21,7 +21,7 @@ const Warehouses = () => {
     return (
         <SidebarLayout>
             <div className='flex flex-col  h-screen flex-col pl-14 pr-14'>
-                <DeleteModal />
+                <DeleteModal isProduct={false} target={selectedWarehouse} onCancel={() => { handleCloseDeleteModal() }} onDelete={() => { onDeleteWarehouse() }} />
                 <CreateWarehouseModal />
                 <CreateDeleteProductWarehouseModal />
                 <h1 className='font-bold text-3xl text-center'>Warehouses</h1>

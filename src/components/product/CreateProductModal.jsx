@@ -7,6 +7,8 @@ import TextField from '@mui/material/TextField';
 import { useModals } from '../../hooks/useModals';
 import { useProduct } from '../../hooks/useProduct';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import { isMuiElement } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -14,7 +16,6 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 600,
-    height: 350,
     bgcolor: 'background.paper',
     borderRadius: 3,
     boxShadow: 24,
@@ -30,6 +31,7 @@ const CreateProductModal = () => {
         description: '',
         price: 0
     })
+    const [isError, setIsError] = useState(false)
     const { name, description, price } = productData
 
     const handleChange = (name) =>
@@ -37,14 +39,25 @@ const CreateProductModal = () => {
             setProductData({ ...productData, [name]: event.target.value })
         };
 
-
     const handleProductCreate = () => {
-        onAddProduct(productData)
+        if (name != '') {
+            onAddProduct(productData)
+            setIsError(false)
+            setProductData({ name: '', description: '', price: 0 })
+        } else {
+            setIsError(true)
+        }
+    }
+
+    const handleCancel = () => {
+        handleCloseCreateProductModal()
+        setIsError(false)
+        setProductData({ name: '', description: '', price: 0 })
     }
 
 
     return (
-        <div>
+        <>
             <Modal
                 keepMounted
                 open={openCreateProductModal}
@@ -81,9 +94,16 @@ const CreateProductModal = () => {
                                         className='bg-gray-200 mt-3 h-12 rounded-lg'
                                     />
                                 </div>
+                                {
+                                    isError
+                                        ? <Alert severity="error">Name field is required</Alert>
+                                        : null
+                                }
+
+
                             </div>
                             <div className='flex flex-row-reverse mt-10'>
-                                <Button style={{ marginLeft: '7px' }} onClick={() => { handleCloseCreateProductModal() }} variant="outlined" color="error">
+                                <Button style={{ marginLeft: '7px' }} onClick={() => { handleCancel() }} variant="outlined" color="error">
                                     Cancel
                                 </Button>
                                 <Button onClick={() => handleProductCreate()} variant="contained" color="primary">
@@ -94,7 +114,7 @@ const CreateProductModal = () => {
                     </div>
                 </Box>
             </Modal>
-        </div>
+        </>
     )
 }
 

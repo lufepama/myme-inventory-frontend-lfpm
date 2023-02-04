@@ -58,9 +58,8 @@ export default function ProductsTable({ productList }) {
 
     //TODO: Add temporal item
     const handleDeleteProduct = (product) => {
-        updateSelectedProduct(product)
-        onDeleteProduct()
         handleOpenDeleteModal()
+        updateSelectedProduct(product)
     }
 
     useEffect(() => {

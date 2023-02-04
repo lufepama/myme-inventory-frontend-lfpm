@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWarehouse } from '@fortawesome/free-solid-svg-icons'
 import TextField from '@mui/material/TextField';
 import { useModals } from '../../hooks/useModals';
+import { useWarehouse } from '../../hooks/useWarehouse';
 import Button from '@mui/material/Button';
 
 const style = {
@@ -23,6 +24,7 @@ const style = {
 const CreateWarehouseModal = () => {
 
     const { openCreateWarehouseModal, handleCloseCreateWarehouseModal } = useModals()
+    const { onAddWarehouse } = useWarehouse()
     const [warehouseData, setWarehouseData] = useState({
         name: '',
         description: '',
@@ -30,6 +32,8 @@ const CreateWarehouseModal = () => {
         country: '',
         phone: null
     })
+    const [isError, setIsError] = useState(false)
+
     const { name, description, address, country, phone } = warehouseData
 
     const handleChange = (name) =>
@@ -37,9 +41,17 @@ const CreateWarehouseModal = () => {
             setWarehouseData({ ...warehouseData, [name]: event.target.value })
         };
 
+    const handleCancel = () => {
+        handleCloseCreateWarehouseModal()
+    }
 
-    const handleProductCreate = () => {
-
+    const handleWarehouseCreate = () => {
+        if (name != '') {
+            onAddWarehouse(warehouseData)
+            setIsError(false)
+        } else {
+            setIsError(true)
+        }
     }
 
 
@@ -99,11 +111,11 @@ const CreateWarehouseModal = () => {
                                 </div>
                             </div>
                             <div className='flex flex-row-reverse mt-10'>
-                                <Button onClick={() => { handleCloseCreateWarehouseModal() }} style={{ marginLeft: '7px' }} variant="contained" color="primary">
+                                <Button style={{ marginLeft: '7px' }} onClick={() => { handleCancel() }} variant="outlined" color="error">
                                     Cancel
                                 </Button>
-                                <Button variant="outlined" color="error">
-                                    Delete
+                                <Button onClick={() => handleWarehouseCreate()} variant="contained" color="primary">
+                                    Add
                                 </Button>
                             </div>
                         </div>

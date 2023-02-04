@@ -16,6 +16,7 @@ import { useWarehouse } from '../../hooks/useWarehouse'
 import { useModals } from '../../hooks/useModals';
 import Checkbox from '@mui/material/Checkbox';
 import { useLocation } from 'wouter';
+import Alert from '@mui/material/Alert';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -42,10 +43,11 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function WarehousesTable() {
 
-    const { warehouseList, updateSelectedWarehouse } = useWarehouse()
+    const { warehouseList, warehouseStatus, updateSelectedWarehouse } = useWarehouse()
     const [_, navigate] = useLocation()
     const { handleOpenCreateWarehouseModal, handleOpenDeleteModal } = useModals()
     const [rows, setRows] = useState([])
+    const { isCreated, isDeleted } = warehouseStatus
 
     const fillRows = () => {
         let tempRows = []
@@ -58,7 +60,7 @@ export default function WarehousesTable() {
 
     //TODO: Add temporal item
     const handleDeleteWarehouse = (warehouse) => {
-        console.log('presse')
+        updateSelectedWarehouse(warehouse)
         handleOpenDeleteModal()
     }
 
@@ -89,6 +91,16 @@ export default function WarehousesTable() {
                     <span className='font-bold'>Add warehouse</span>
                 </Button>
             </div>
+            {
+                isCreated
+                    ? <Alert className='mt-5' severity="success">Warehouse <span className='font-bold'>added</span> successfully</Alert>
+                    : null
+            }
+            {
+                isDeleted
+                    ? <Alert className='mt-5' severity="success">Warehouse <span className='font-bold'>deleted</span> successfully</Alert>
+                    : null
+            }
             <Paper sx={{
                 width: '100%', height: '100%',
                 overflowY: 'scroll', marginTop: '20px', scrollBehavior: 'auto',

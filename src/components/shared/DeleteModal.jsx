@@ -20,11 +20,9 @@ const style = {
     p: 4,
 };
 
-const DeleteModal = ({ product }) => {
+const DeleteModal = ({ isProduct = false, target, onCancel, onDelete }) => {
 
-    const { handleCloseDeleteModal, openDeleteModal } = useModals()
-    const { onDeleteProduct } = useProduct()
-
+    const { openDeleteModal } = useModals()
 
     return (
         <div>
@@ -38,15 +36,17 @@ const DeleteModal = ({ product }) => {
                     <div className='flex flex-col'>
                         <div className='p-2 flex flex-row items-center '>
                             <FontAwesomeIcon className='text-xl ' icon={faBoxOpen} />
-                            <h1 className='text-xl ml-4 font-semibold'>Delete product</h1>
+                            <h1 className='text-xl ml-4 font-semibold'>Delete {isProduct ? 'Product' : 'Warehouse'}</h1>
                         </div>
                         <div className='p-2 flex flex-col'>
-                            <p className='text-lg'>Are you sure you want to delete {product?.name} with and id of {product?.id}</p>
+                            <p className='text-lg'>Are you sure you want to delete <span className='font-bold'>
+                                {target?.name}</span> {isProduct ? 'product' : 'warehouse'} with and id of <span className='font-bold'>{target?.id}</span>.
+                            </p>
                             <div className='flex flex-row-reverse mt-10'>
-                                <Button onClick={() => { handleCloseDeleteModal() }} style={{ marginLeft: '7px' }} variant="contained" color="primary">
+                                <Button onClick={() => { onCancel() }} style={{ marginLeft: '7px' }} variant="contained" color="primary">
                                     Cancel
                                 </Button>
-                                <Button onClick={() => { onDeleteProduct() }} variant="outlined" color="error">
+                                <Button onClick={() => { onDelete() }} variant="outlined" color="error">
                                     Delete
                                 </Button>
                             </div>

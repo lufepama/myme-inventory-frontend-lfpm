@@ -4,10 +4,14 @@ import ProductsTable from '../components/product/ProductsTable'
 import { useProduct } from '../hooks/useProduct'
 import DeleteModal from '../components/shared/DeleteModal'
 import CreateProductModal from '../components/product/CreateProductModal'
+import { useModals } from '../hooks/useModals'
 
 const Products = () => {
 
-    const { fetchProducts, productList, selectedProduct } = useProduct()
+    const { fetchProducts, productList,
+        selectedProduct, onDeleteProduct
+    } = useProduct()
+    const { handleCloseDeleteModal } = useModals()
 
     useEffect(() => {
         fetchProducts()
@@ -16,7 +20,7 @@ const Products = () => {
     return (
         <SidebarLayout>
             <div className='flex h-screen flex-col flex-col pl-14 pr-14'>
-                <DeleteModal product={selectedProduct} />
+                <DeleteModal isProduct={true} target={selectedProduct} onCancel={() => { handleCloseDeleteModal() }} onDelete={() => { onDeleteProduct() }} />
                 <CreateProductModal />
                 <h1 className='font-bold text-3xl text-center'>Products</h1>
                 <div className='h-1/2'>
