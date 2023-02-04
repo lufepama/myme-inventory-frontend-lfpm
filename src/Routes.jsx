@@ -10,14 +10,14 @@ import Warehouses from './pages/Warehouses';
 import { AuthenticationProvider } from './context/AuthenticationContext';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { ProductProvider } from './context/ProductContext';
-import { DeleteModalProvider } from './context/DeleteModalContext';
+import { ModalsProvider } from './context/ModalsContext';
 
 const Routes = () => {
     return (
         <ProSidebarProvider>
             <AuthenticationProvider>
                 <ProductProvider>
-                    <DeleteModalProvider>
+                    <ModalsProvider>
                         <Switch>
                             <Route path='/home/' component={Home} />
                             <Route path='/products/' component={Products} />
@@ -25,7 +25,7 @@ const Routes = () => {
                             <Route path='/login/' component={Login} />
                             <Route path='/signup/' component={Signup} />
                         </Switch>
-                    </DeleteModalProvider>
+                    </ModalsProvider>
                 </ProductProvider>
             </AuthenticationProvider>
         </ProSidebarProvider>

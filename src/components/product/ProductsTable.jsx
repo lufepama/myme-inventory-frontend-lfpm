@@ -13,7 +13,7 @@ import FilterInput from '../shared/FilterInput';
 import Button from '@mui/material/Button';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import { useProduct } from '../../hooks/useProduct'
-import { useDeleteModal } from '../../hooks/useDeleteModal';
+import { useModals } from '../../hooks/useModals';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -32,10 +32,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
 function createmyData(id, name, description, price) {
     return { id, name, description, price }
 }
@@ -44,7 +40,7 @@ function createmyData(id, name, description, price) {
 export default function CustomizedTables() {
 
     const { productList } = useProduct()
-    const { handleOpenDeleteModal } = useDeleteModal()
+    const { handleOpenDeleteModal, handleOpenCreateProductModal } = useModals()
     const [rows, setRows] = useState([])
 
     const fillRows = () => {
@@ -59,7 +55,10 @@ export default function CustomizedTables() {
     //TODO: Add temporal item
     const handleDeleteProduct = (product) => {
         handleOpenDeleteModal()
+    }
 
+    const handleCreateProduct = () => {
+        handleOpenCreateProductModal()
     }
 
 
@@ -73,7 +72,11 @@ export default function CustomizedTables() {
                 <div className='w-1/3 h-12'>
                     <FilterInput />
                 </div>
-                <Button variant="contained" endIcon={<WidgetsIcon />}>
+                <Button
+                    variant="contained"
+                    endIcon={<WidgetsIcon />}
+                    onClick={() => handleCreateProduct()}
+                >
                     <span className='font-bold'>Add product</span>
                 </Button>
             </div>

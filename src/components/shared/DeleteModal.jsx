@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons'
-import { useDeleteModal } from '../../hooks/useDeleteModal';
+import { useModals } from '../../hooks/useModals';
 import Button from '@mui/material/Button';
 
 const style = {
@@ -21,14 +21,14 @@ const style = {
 
 const DeleteModal = () => {
 
-    const { handleCloseDeleteModal, open } = useDeleteModal()
+    const { handleCloseDeleteModal, openDeleteModal } = useModals()
 
 
     return (
         <div>
             <Modal
                 keepMounted
-                open={open}
+                open={openDeleteModal}
                 aria-labelledby="keep-mounted-modal-title"
                 aria-describedby="keep-mounted-modal-description"
             >
