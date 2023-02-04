@@ -37,7 +37,7 @@ function createmyData(id, name, description, price) {
 }
 
 
-export default function CustomizedTables() {
+export default function ProductsTable() {
 
     const { productList } = useProduct()
     const { handleOpenDeleteModal, handleOpenCreateProductModal } = useModals()
@@ -70,7 +70,7 @@ export default function CustomizedTables() {
         <>
             <div className='w-full mt-20 flex flex-row justify-between'>
                 <div className='w-1/3 h-12'>
-                    <FilterInput />
+                    <FilterInput placeholder={'Search product...'} />
                 </div>
                 <Button
                     variant="contained"

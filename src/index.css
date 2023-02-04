@@ -27,21 +27,6 @@
     background-color: #333c5c;
 }
 
-.css-pdct74-MuiTablePagination-selectLabel {
-    /* display: none !important; */
-}
-
-.css-1160xiw-MuiPaper-root-MuiDrawer-paper {
-    background-color: #333c5c;
-    border-left-width: 8px;
-    border-left-color: #3f4a72;
-}
-
-@media (max-width: 450px) {
-    .css-1k88rtw {
-        /* min-width: 203px !important; */
-    }
-}
 
 .css-10bey84-MuiSvgIcon-root-MuiNativeSelect-icon {
     color: white;
@@ -50,4 +35,8 @@
 
 .css-16jkw2k:hover .menu-icon-text {
     color: black !important;
+}
+
+.css-djpzgj-MuiTableRow-root:hover {
+    background-color: #FCEBFC;
 }

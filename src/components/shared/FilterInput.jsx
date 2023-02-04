@@ -5,11 +5,11 @@ import Search from "@mui/icons-material/Search";
 
 
 
-const FilterInput = () => {
+const FilterInput = ({ placeholder }) => {
     return (
         <div className='h-full flex flex-row '>
             <TextField
-                placeholder='Search product...'
+                placeholder={placeholder}
                 InputProps={{
                     endAdornment: <InputAdornment position="end"><Search /></InputAdornment>
                 }}

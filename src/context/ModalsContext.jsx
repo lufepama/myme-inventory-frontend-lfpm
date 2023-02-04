@@ -8,11 +8,13 @@ export const ModalsProvider = ({ children }) => {
 
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
     const [openCreateProductModal, setOpenCreateProductModal] = useState(false);
+    const [openCreateWarehouseModal, setOpenCreateWarehouseModal] = useState(false);
 
     return (
         <Context.Provider value={{
             openDeleteModal, setOpenDeleteModal,
-            openCreateProductModal, setOpenCreateProductModal
+            openCreateProductModal, setOpenCreateProductModal,
+            openCreateWarehouseModal, setOpenCreateWarehouseModal
         }} >
             {children}
         </Context.Provider>

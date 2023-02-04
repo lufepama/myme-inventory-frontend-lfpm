@@ -4,7 +4,8 @@ import DeleteModalContext from '../context/ModalsContext'
 export const useModals = () => {
 
     const { openDeleteModal, setOpenDeleteModal,
-        openCreateProductModal, setOpenCreateProductModal
+        openCreateProductModal, setOpenCreateProductModal,
+        openCreateWarehouseModal, setOpenCreateWarehouseModal,
     }
         = useContext(DeleteModalContext)
 
@@ -14,12 +15,18 @@ export const useModals = () => {
     const handleOpenCreateProductModal = () => setOpenCreateProductModal(true)
     const handleCloseCreateProductModal = () => setOpenCreateProductModal(false)
 
+    const handleOpenCreateWarehouseModal = () => setOpenCreateWarehouseModal(true)
+    const handleCloseCreateWarehouseModal = () => setOpenCreateWarehouseModal(false)
+
     return {
         openDeleteModal,
         openCreateProductModal,
+        openCreateWarehouseModal,
         handleOpenDeleteModal,
         handleCloseDeleteModal,
         handleOpenCreateProductModal,
-        handleCloseCreateProductModal
+        handleCloseCreateProductModal,
+        handleOpenCreateWarehouseModal,
+        handleCloseCreateWarehouseModal
     }
 }

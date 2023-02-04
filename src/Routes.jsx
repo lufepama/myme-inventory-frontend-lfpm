@@ -11,22 +11,25 @@ import { AuthenticationProvider } from './context/AuthenticationContext';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { ProductProvider } from './context/ProductContext';
 import { ModalsProvider } from './context/ModalsContext';
+import { WarehouseProvider } from './context/WarehouseContext';
 
 const Routes = () => {
     return (
         <ProSidebarProvider>
             <AuthenticationProvider>
-                <ProductProvider>
-                    <ModalsProvider>
-                        <Switch>
-                            <Route path='/home/' component={Home} />
-                            <Route path='/products/' component={Products} />
-                            <Route path='/warehouses/' component={Warehouses} />
-                            <Route path='/login/' component={Login} />
-                            <Route path='/signup/' component={Signup} />
-                        </Switch>
-                    </ModalsProvider>
-                </ProductProvider>
+                <WarehouseProvider>
+                    <ProductProvider>
+                        <ModalsProvider>
+                            <Switch>
+                                <Route path='/home/' component={Home} />
+                                <Route path='/products/' component={Products} />
+                                <Route path='/warehouses/' component={Warehouses} />
+                                <Route path='/login/' component={Login} />
+                                <Route path='/signup/' component={Signup} />
+                            </Switch>
+                        </ModalsProvider>
+                    </ProductProvider>
+                </WarehouseProvider>
             </AuthenticationProvider>
         </ProSidebarProvider>
     )
