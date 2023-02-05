@@ -102,9 +102,9 @@ export default function WarehousesTable() {
                     : null
             }
             <Paper sx={{
-                width: '100%', height: 'auto',
+                width: '100%', height: '300px',
                 overflowY: 'scroll', marginTop: '20px', scrollBehavior: 'auto',
-                overflowX: 'none'
+                overflowX: 'none',
             }}>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -120,37 +120,36 @@ export default function WarehousesTable() {
                                 <StyledTableCell align="right">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
-                        {
-                            !warehouseList.length > 0
-                                ? <h1>No warehouses found</h1>
-                                : (
-                                    <TableBody className='bg-table-color'>
-                                        {rows.map((row) => (
-                                            <StyledTableRow key={row.id} className='bg-table-color'>
-                                                <StyledTableCell className='cursor-pointer' align="left">
-                                                    <Checkbox  {...label} />
-                                                </StyledTableCell>
-                                                <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.id}</StyledTableCell>
-                                                <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.name}</StyledTableCell>
-                                                <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >
-                                                    {row.description}
-                                                </StyledTableCell>
-                                                <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="left">{row.address}</StyledTableCell>
-                                                <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="center">{row.country}</StyledTableCell>
-                                                <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="right">{row.phoneNumber}</StyledTableCell>
-                                                <StyledTableCell align="right">
-                                                    <FontAwesomeIcon
-                                                        className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
-                                                        onClick={() => handleDeleteWarehouse(row)}
-                                                    />
-                                                </StyledTableCell>
-                                            </StyledTableRow>
-                                        ))}
-                                    </TableBody>
-                                )
-                        }
+                        <TableBody className='bg-table-color'>
+                            {rows.map((row) => (
+                                <StyledTableRow key={row.id} className='bg-table-color'>
+                                    <StyledTableCell className='cursor-pointer' align="left">
+                                        <Checkbox  {...label} />
+                                    </StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.id}</StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.name}</StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >
+                                        {row.description}
+                                    </StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="left">{row.address}</StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="center">{row.country}</StyledTableCell>
+                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="right">{row.phoneNumber}</StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        <FontAwesomeIcon
+                                            className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
+                                            onClick={() => handleDeleteWarehouse(row)}
+                                        />
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ))}
+                        </TableBody>
                     </Table>
                 </TableContainer>
+                {
+                    warehouseList.length == 0
+                        ? <h1>No warehouses found</h1>
+                        : null
+                }
             </Paper>
         </>
     );

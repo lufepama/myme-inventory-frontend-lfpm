@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SidebarLayout from '../components/shared/SidebarLayout'
 import ProductsTable from '../components/product/ProductsTable'
 import { useProduct } from '../hooks/useProduct'
@@ -12,6 +12,19 @@ const Products = () => {
         selectedProduct, onDeleteProduct
     } = useProduct()
     const { handleCloseDeleteModal } = useModals()
+    const [query, setQuery] = useState('')
+    const [filteredList, setFilteredList] = useState(productList)
+
+    const handleInputChange = (e) => {
+        setQuery(e.target.value)
+        const results = productList.filter(product => {
+            if (e.target.value == "") {
+                return productList
+            }
+            return product?.name.toLowerCase().includes(e.target.value.toLowerCase())
+        })
+        setFilteredList(results)
+    }
 
     useEffect(() => {
         fetchProducts()

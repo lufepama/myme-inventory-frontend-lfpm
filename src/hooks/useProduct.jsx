@@ -52,11 +52,16 @@ export const useProduct = () => {
     }
 
     const updateSelectedProduct = (product) => {
+        console.log(product)
         setSelectedProduct(product)
     }
 
     const resetSelectedProduct = () => {
         setSelectedProduct({})
+    }
+
+    const updateProductList = (productList) => {
+        setProductList(productList)
     }
 
     return {
@@ -67,6 +72,7 @@ export const useProduct = () => {
         onAddProduct,
         onDeleteProduct,
         updateSelectedProduct,
-        resetSelectedProduct
+        resetSelectedProduct,
+        updateProductList
     }
 }

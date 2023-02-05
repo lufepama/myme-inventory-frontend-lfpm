@@ -39,10 +39,10 @@ function createmyData(id, name, description, price) {
 }
 
 
-export default function ProductsTable({ productList }) {
+export default function ProductsTable({ productList, handleInputChange, inputValue }) {
 
     const { handleOpenDeleteModal, handleOpenCreateProductModal } = useModals()
-    const { productStatus, onDeleteProduct, updateSelectedProduct } = useProduct()
+    const { productStatus, updateSelectedProduct } = useProduct()
     const [rows, setRows] = useState([])
 
     const { isCreated, isDeleted } = productStatus
@@ -70,7 +70,7 @@ export default function ProductsTable({ productList }) {
         <>
             <div className='w-full mt-20 flex flex-row justify-between'>
                 <div className='w-1/3 h-12'>
-                    <FilterInput placeholder={'Search product...'} />
+                    <FilterInput handleInputChange={handleInputChange} placeholder={'Search product...'} inpinputValue={inputValue} />
                 </div>
                 <Button
                     variant="contained"
@@ -93,9 +93,9 @@ export default function ProductsTable({ productList }) {
             }
 
             <Paper sx={{
-                width: '100%', height: 'auto',
+                width: '100%', height: '300px',
                 overflowY: 'scroll', marginTop: '20px', scrollBehavior: 'auto',
-                overflowX: 'none'
+                overflowX: 'none',
             }}>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -108,33 +108,31 @@ export default function ProductsTable({ productList }) {
                                 <StyledTableCell align="right">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
-                        {
-                            !productList.length > 0
-                                ? <h1>No products found</h1>
-                                : (
-                                    <TableBody className='bg-table-color'>
-                                        {rows.map((row) => (
-                                            <StyledTableRow key={row.id} className='bg-table-color'>
-                                                <StyledTableCell >{row.id}</StyledTableCell>
-                                                <StyledTableCell >{row.name}</StyledTableCell>
-                                                <StyledTableCell >
-                                                    {row.description}
-                                                </StyledTableCell>
-                                                <StyledTableCell align="right">{row.price}</StyledTableCell>
-                                                <StyledTableCell align="right">
-                                                    <FontAwesomeIcon
-                                                        className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
-                                                        onClick={() => handleDeleteProduct(row)}
-                                                    />
-                                                </StyledTableCell>
-                                            </StyledTableRow>
-                                        ))}
-                                    </TableBody>
-                                )
-                        }
-
+                        <TableBody className='bg-table-color'>
+                            {rows.map((row) => (
+                                <StyledTableRow key={row.id} className='bg-table-color'>
+                                    <StyledTableCell >{row.id}</StyledTableCell>
+                                    <StyledTableCell >{row.name}</StyledTableCell>
+                                    <StyledTableCell >
+                                        {row.description}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">{row.price}</StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        <FontAwesomeIcon
+                                            className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
+                                            onClick={() => handleDeleteProduct(row)}
+                                        />
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ))}
+                        </TableBody>
                     </Table>
                 </TableContainer>
+                {
+                    productList.length == 0
+                        ? <h1>No products found</h1>
+                        : null
+                }
             </Paper>
         </>
     );

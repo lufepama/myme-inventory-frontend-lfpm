@@ -7,6 +7,10 @@ import TextField from '@mui/material/TextField';
 import { useModals } from '../../hooks/useModals';
 import Button from '@mui/material/Button';
 import FilterInput from '../shared/FilterInput';
+import Autocomplete from '@mui/material/Autocomplete';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useProduct } from '../../hooks/useProduct'
+import AutocompleteInput from '../../components/shared/AutocompleteInput'
 
 const style = {
     position: 'absolute',
@@ -24,23 +28,31 @@ const style = {
 const CreateDeleteProductWarehouseModal = () => {
 
     const { openCreateDeleteProductWarehouseModal, handleCloseCreateDeleteProductWarehouseModal } = useModals()
-    const [warehouseData, setWarehouseData] = useState({
+    const { productList, updateSelectedProduct } = useProduct()
+    const [productData, setProductData] = useState({
+        id: '',
         name: '',
         description: '',
-        address: '',
-        country: '',
-        phone: null
+        price: '',
+        amount: 0
     })
-    const { name, description, address, country, phone } = warehouseData
+    const { id, name, description, price, amount } = productData
 
     const handleChange = (name) =>
         (event) => {
-            setWarehouseData({ ...warehouseData, [name]: event.target.value })
+            setProductData({ ...productData, [name]: event.target.value })
         };
 
 
-    const handleProductCreate = () => {
-
+    const handleSeletedProductInput = (product) => {
+        updateSelectedProduct(product)
+        setProductData({
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            amount: amount
+        })
     }
 
     return (
@@ -58,7 +70,7 @@ const CreateDeleteProductWarehouseModal = () => {
                             <h1 className='text-xl ml-4 font-semibold'>Create warehouse</h1>
                         </div>
                         <div className='w-52 h-12'>
-                            <FilterInput placeholder={'Search product...'} />
+                            <AutocompleteInput productList={productList} handleSeletedProductInput={handleSeletedProductInput} />
                         </div>
                         <div className='p-2 flex flex-col '>
                             <div className='w-full create-prod-ware-container'>
@@ -70,7 +82,7 @@ const CreateDeleteProductWarehouseModal = () => {
                                             placeholder='Id'
                                             disabled={true}
                                             name='name'
-                                            value={name}
+                                            value={id}
                                             size='small'
                                             onChange={handleChange('name')}
                                             className='bg-gray-200 rounded-md w-full '
@@ -79,7 +91,7 @@ const CreateDeleteProductWarehouseModal = () => {
                                     <div className='flex flex-row'>
                                         <label className='self-center mr-3'>Name: </label>
                                         <TextField
-                                            placeholder='Description'
+                                            placeholder='Name'
                                             name='name'
                                             disabled={true}
                                             value={name}
@@ -91,10 +103,10 @@ const CreateDeleteProductWarehouseModal = () => {
                                     <div className='flex flex-row'>
                                         <label className='self-center mr-3'>Description: </label>
                                         <TextField
-                                            placeholder='Name'
+                                            placeholder='Description'
                                             name='name'
                                             disabled={true}
-                                            value={name}
+                                            value={description}
                                             size='small'
                                             onChange={handleChange('name')}
                                             className='bg-gray-200 rounded-md w-full '
@@ -103,12 +115,24 @@ const CreateDeleteProductWarehouseModal = () => {
                                     <div className='flex flex-row'>
                                         <label className='self-center mr-3'>Price: </label>
                                         <TextField
-                                            placeholder='Name'
+                                            placeholder='Price'
                                             name='name'
                                             disabled={true}
-                                            value={name}
+                                            value={price}
                                             size='small'
-                                            onChange={handleChange('name')}
+                                            onChange={handleChange('price')}
+                                            className='bg-gray-200 rounded-md w-full '
+                                        />
+                                    </div>
+                                    <div className='flex flex-row'>
+                                        <label className='self-center mr-3'>Amount: </label>
+                                        <TextField
+                                            placeholder='Price'
+                                            name='name'
+                                            type='number'
+                                            value={amount}
+                                            size='small'
+                                            onChange={handleChange('amount')}
                                             className='bg-gray-200 rounded-md w-full '
                                         />
                                     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SidebarLayout from '../components/shared/SidebarLayout'
 import WarehousesTable from '../components/warehouse/WarehousesTable'
 import { useWarehouse } from '../hooks/useWarehouse'
@@ -11,8 +11,22 @@ import { useModals } from '../hooks/useModals'
 
 const Warehouses = () => {
 
-    const { selectedWarehouse, onDeleteWarehouse, fetchWarehouses, } = useWarehouse()
+    const { selectedWarehouse, onDeleteWarehouse, fetchWarehouses, warehouseList } = useWarehouse()
     const { handleOpenCreateDeleteProductWarehouseModal, handleCloseDeleteModal } = useModals()
+    const [filteredList, setFilteredList] = useState(warehouseList)
+    const [query, setQuery] = useState('')
+
+    // const handleInputChange = (e) => {
+    //     setQuery(e.target.value)
+    //     const results = warehouseList.filter(product => {
+    //         if (e.target.value == "") {
+    //             return warehouseList
+    //         }
+    //         return product?.name.toLowerCase().includes(e.target.value.toLowerCase())
+    //     })
+    //     setFilteredList(results)
+    // }
+
 
     useEffect(() => {
         fetchWarehouses()
