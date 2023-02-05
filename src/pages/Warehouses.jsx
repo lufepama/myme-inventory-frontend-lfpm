@@ -4,11 +4,9 @@ import WarehousesTable from '../components/warehouse/WarehousesTable'
 import { useWarehouse } from '../hooks/useWarehouse'
 import DeleteModal from '../components/shared/DeleteModal'
 import CreateWarehouseModal from '../components/warehouse/CreateWarehouseModal'
-import WidgetsIcon from '@mui/icons-material/Widgets';
 import Button from '@mui/material/Button';
 import CreateDeleteProductWarehouseModal from '../components/warehouse/CreateDeleteProductWarehouseModal'
 import { useModals } from '../hooks/useModals'
-import { useProduct } from '../hooks/useProduct'
 
 const Warehouses = () => {
 
@@ -22,9 +20,9 @@ const Warehouses = () => {
         setIsCreate(value)
     }
 
-    const handleCreateAndDelete = () => {
+    const handleCreateAndDelete = (amount) => {
         if (isCreate) {
-            onAddDeleteProductMultipleWarehouse('Add')
+            onAddDeleteProductMultipleWarehouse('Add', amount)
         }
         else {
             onAddDeleteProductMultipleWarehouse('Del')
@@ -41,7 +39,7 @@ const Warehouses = () => {
             <div className='flex flex-col  h-screen flex-col pl-14 pr-14'>
                 <DeleteModal isProduct={false} target={selectedWarehouse} onCancel={() => { handleCloseDeleteModal() }} onDelete={() => { onDeleteWarehouse() }} />
                 <CreateWarehouseModal />
-                <CreateDeleteProductWarehouseModal isCreate={isCreate} onSubmit={() => handleCreateAndDelete()} />
+                <CreateDeleteProductWarehouseModal isCreate={isCreate} onSubmit={handleCreateAndDelete} />
                 <h1 className='font-bold text-3xl text-center'>Warehouses</h1>
                 <div className='h-1/2'>
                     <WarehousesTable />

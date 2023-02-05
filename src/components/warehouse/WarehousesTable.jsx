@@ -70,9 +70,7 @@ export default function WarehousesTable() {
     return (
         <>
             <div className='w-full mt-20 flex flex-row justify-between'>
-                <div className='w-1/3 h-12'>
-                    <FilterInput placeholder={'Search warehouse...'} />
-                </div>
+
                 <Button
                     variant="contained"
                     endIcon={<WidgetsIcon />}
@@ -116,6 +114,11 @@ export default function WarehousesTable() {
                             ))}
                         </TableBody>
                     </Table>
+                    {
+                        warehouseList.length == 0
+                            ? <h1>No warehouses found.</h1>
+                            : null
+                    }
                 </TableContainer>
             </Paper>
         </>

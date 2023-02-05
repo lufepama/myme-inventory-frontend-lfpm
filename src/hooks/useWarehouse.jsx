@@ -83,7 +83,7 @@ export const useWarehouse = () => {
         }
     }
 
-    const onAddDeleteProductMultipleWarehouse = async (action) => {
+    const onAddDeleteProductMultipleWarehouse = async (action, amount = null) => {
         let temporalWarehouseListId = []
         temporalWarehouseList.map(item => temporalWarehouseListId.push(item.id))
 
@@ -91,7 +91,7 @@ export const useWarehouse = () => {
             const formatData = {
                 warehouseIdList: temporalWarehouseListId,
                 productId: selectedProduct.id,
-                amount: selectedProduct.amount
+                amount: amount
             }
             if (action == 'Add') {
                 const res = await createProductMultipleWarehouses(csrftoken, formatData)
@@ -102,13 +102,13 @@ export const useWarehouse = () => {
         }
     }
 
-    const onAddDeleteProductWarehouse = async (action) => {
+    const onAddDeleteProductWarehouse = async (action, amount = null) => {
         if (csrftoken && Object.keys(selectedProduct).length != 0) {
             if (action == 'Add') {
                 const formatedData = {
                     warehouseId: selectedWarehouse.id,
                     productId: selectedProduct.id,
-                    amount: selectedProduct.amount
+                    amount: amount
                 }
                 const res = await createProductWarehouse(csrftoken, formatedData)
                 if (res.success) {

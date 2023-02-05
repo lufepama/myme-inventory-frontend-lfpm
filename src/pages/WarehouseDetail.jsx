@@ -13,10 +13,11 @@ const WarehouseDetail = ({ params }) => {
 
     const { fetchProductsWarehouse, onAddDeleteProductWarehouse, selectedWarehouse, productsWarehouseList } = useWarehouse()
     const { handleCloseDeleteModal, handleCloseCreateDeleteProductWarehouseModal } = useModals()
-    const { selectedProduct } = useProduct()
+    const { selectedProduct, updateSelectedProduct } = useProduct()
 
-    const handleCreateProductWarehouse = () => {
-        onAddDeleteProductWarehouse('Add')
+    const handleCreateProductWarehouse = (amount) => {
+
+        onAddDeleteProductWarehouse('Add', amount)
         handleCloseCreateDeleteProductWarehouseModal()
     }
 
@@ -28,7 +29,7 @@ const WarehouseDetail = ({ params }) => {
         <SidebarLayout>
             <div className='flex flex-col pl-14 pr-14'>
                 <DeleteModal isProduct={selectedProduct} target={selectedProduct} onCancel={() => handleCloseDeleteModal()} onDelete={() => { onAddDeleteProductWarehouse('Del') }} />
-                <CreateDeleteProductWarehouseModal isCreate={true} onSubmit={() => handleCreateProductWarehouse()} />
+                <CreateDeleteProductWarehouseModal isCreate={true} onSubmit={handleCreateProductWarehouse} />
                 <h1 className='font-bold text-3xl text-center'>Warehouse detail</h1>
                 <div className='flex flex-row  mt-5'>
                     <div className='p-5'>

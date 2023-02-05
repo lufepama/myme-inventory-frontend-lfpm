@@ -44,3 +44,8 @@
 .create-prod-ware-container>.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
     height: 32px;
 }
+
+.css-757jl3-MuiPaper-root,
+.css-fb9y8i-MuiPaper-root {
+    box-shadow: none !important;
+}

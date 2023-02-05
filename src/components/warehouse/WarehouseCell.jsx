@@ -31,7 +31,6 @@ const WarehouseCell = ({ row }) => {
 
     const [checkbox, setCheckBox] = useState(false)
 
-
     const { updateSelectedWarehouse, updateTemporalWarehouseList } = useWarehouse()
     const { handleOpenDeleteModal } = useModals()
     const [_, navigate] = useLocation()

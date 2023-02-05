@@ -71,9 +71,6 @@ export default function ProductWarehouseTable({ productList }) {
     return (
         <>
             <div className='w-full mt-20 flex flex-row justify-between'>
-                <div className='w-1/3 h-12'>
-                    <FilterInput />
-                </div>
                 <Button
                     variant="contained"
                     endIcon={<WidgetsIcon />}

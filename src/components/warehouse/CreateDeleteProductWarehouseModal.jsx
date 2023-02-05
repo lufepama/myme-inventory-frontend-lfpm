@@ -36,11 +36,13 @@ const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
         price: '',
         amount: 0
     })
+
     const { id, name, description, price, amount } = productData
 
     const handleChange = (name) =>
         (event) => {
             setProductData({ ...productData, [name]: event.target.value })
+
         };
 
 
@@ -71,7 +73,8 @@ const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
                             <h1 className='text-xl ml-4 font-semibold'>Create warehouse</h1>
                         </div>
                         <div className='w-52 h-12'>
-                            <AutocompleteInput productList={productList} handleSeletedProductInput={handleSeletedProductInput} />
+                            <AutocompleteInput productList={productList}
+                                handleSeletedProductInput={handleSeletedProductInput} />
                         </div>
                         <div className='p-2 flex flex-col '>
                             <div className='w-full create-prod-ware-container'>

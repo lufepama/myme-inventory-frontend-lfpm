@@ -68,6 +68,7 @@ export const useProduct = () => {
         productList,
         productStatus,
         selectedProduct,
+        setSelectedProduct,
         fetchProducts,
         onAddProduct,
         onDeleteProduct,

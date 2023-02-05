@@ -39,7 +39,7 @@ function createmyData(id, name, description, price) {
 }
 
 
-export default function ProductsTable({ productList, handleInputChange, inputValue }) {
+export default function ProductsTable({ productList }) {
 
     const { handleOpenDeleteModal, handleOpenCreateProductModal } = useModals()
     const { productStatus, updateSelectedProduct } = useProduct()
@@ -69,9 +69,7 @@ export default function ProductsTable({ productList, handleInputChange, inputVal
     return (
         <>
             <div className='w-full mt-20 flex flex-row justify-between'>
-                <div className='w-1/3 h-12'>
-                    <FilterInput handleInputChange={handleInputChange} placeholder={'Search product...'} inpinputValue={inputValue} />
-                </div>
+
                 <Button
                     variant="contained"
                     endIcon={<WidgetsIcon />}
@@ -95,9 +93,11 @@ export default function ProductsTable({ productList, handleInputChange, inputVal
             <Paper sx={{
                 width: '100%', height: '300px',
                 overflowY: 'scroll', marginTop: '20px', scrollBehavior: 'auto',
-                overflowX: 'none',
+                overflowX: 'none', borderWidth: '0px'
             }}>
-                <TableContainer component={Paper}>
+
+                <TableContainer className='h-full' component={Paper}>
+
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
@@ -127,12 +127,13 @@ export default function ProductsTable({ productList, handleInputChange, inputVal
                             ))}
                         </TableBody>
                     </Table>
+                    {
+                        productList.length == 0
+                            ? <h1>No products found</h1>
+                            : null
+                    }
                 </TableContainer>
-                {
-                    productList.length == 0
-                        ? <h1>No products found</h1>
-                        : null
-                }
+
             </Paper>
         </>
     );
