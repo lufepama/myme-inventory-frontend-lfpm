@@ -40,7 +40,6 @@ const Login = () => {
     }
 
     const onSubmit = async () => {
-        console.log('presse')
         setUserData({ ...userData, isPsswError: false, fieldsError: false })
         setLoginStatus({ ...loginStatus, loginError: false })
         const areFieldsFill = areFieldsFilled()

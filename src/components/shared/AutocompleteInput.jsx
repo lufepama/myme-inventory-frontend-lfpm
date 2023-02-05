@@ -23,6 +23,13 @@ export default function AutocompleteInput({ productList, handleSeletedProductInp
                 options={productList}
                 onChange={(e, value) => handleSeletedProductInput(value)}
                 getOptionLabel={(option) => option.name}
+                renderOption={(props, option) => {
+                    return (
+                        <li {...props} key={option.id}>
+                            {option.name}
+                        </li>
+                    )
+                }}
                 renderInput={(params) => (
                     <div ref={params.InputProps.ref} className='flex flex-row items-center b'>
                         <input ref={inputRef} type="text" {...params.inputProps} className='h-10 w-full' />

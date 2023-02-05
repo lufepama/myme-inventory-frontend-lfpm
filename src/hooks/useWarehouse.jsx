@@ -3,8 +3,10 @@ import WarehouseContext from '../context/WarehouseContext'
 import Cookies from 'js-cookie'
 import {
     getProductsWarehouse, getWarehouses,
-    createWarehouse, deleteWarehouse, createProductMultipleWarehouses, deleteProductMultipleWarehouses
+    createWarehouse, deleteWarehouse, createProductMultipleWarehouses, deleteProductMultipleWarehouses,
+
 } from '../helper/warehouse'
+import { deleteProductWarehouse, createProductWarehouse } from '../helper/product'
 import { useModals } from './useModals'
 import { useProduct } from './useProduct'
 
@@ -26,7 +28,6 @@ export const useWarehouse = () => {
         const csrftoken = Cookies.get('csrftoken')
         if (csrftoken) {
             const res = await getProductsWarehouse(warehouseId, csrftoken)
-            console.log(res)
             if (res.success) {
                 setProductsWarehouseList(res.data)
             }
@@ -60,7 +61,6 @@ export const useWarehouse = () => {
         handleCloseDeleteModal()
         if (csrftoken && Object.keys(selectedWarehouse).length != 0) {
             const res = await deleteWarehouse(csrftoken, selectedWarehouse.id)
-            console.log({ res })
             if (res.success) {
                 setWarehouseStatus({ isCreated: false, isDeleted: true })
                 const filterdList = warehouseList.filter(item => item.id != selectedWarehouse.id)
@@ -95,12 +95,42 @@ export const useWarehouse = () => {
             }
             if (action == 'Add') {
                 const res = await createProductMultipleWarehouses(csrftoken, formatData)
-                console.log({ res })
             } else if (action == 'Del') {
                 const res = await deleteProductMultipleWarehouses(csrftoken, formatData)
-                console.log({ res })
             }
 
+        }
+    }
+
+    const onAddDeleteProductWarehouse = async (action) => {
+        if (csrftoken && Object.keys(selectedProduct).length != 0) {
+            if (action == 'Add') {
+                const formatedData = {
+                    warehouseId: selectedWarehouse.id,
+                    productId: selectedProduct.id,
+                    amount: selectedProduct.amount
+                }
+                const res = await createProductWarehouse(csrftoken, formatedData)
+                if (res.success) {
+
+                    const newProductWarehouse = res.data
+
+                    const filterList = productsWarehouseList.filter(el =>
+                        el.product.id == selectedProduct.id
+                    )
+                    if (!filterList.length > 0) {
+                        setWarehouseStatus({ isCreated: true, isDeleted: false })
+                        setProductsWarehouseList([...productsWarehouseList, newProductWarehouse])
+                    }
+                }
+            } else if (action == 'Del') {
+                const res = await deleteProductWarehouse(csrftoken, selectedProduct.id)
+                if (res.success) {
+                    const filteredList = productsWarehouseList.filter(item => item.id != selectedProduct.id)
+                    setProductsWarehouseList(filteredList)
+                    handleCloseDeleteModal()
+                }
+            }
         }
     }
 
@@ -117,6 +147,7 @@ export const useWarehouse = () => {
         onAddWarehouse,
         onDeleteWarehouse,
         updateTemporalWarehouseList,
-        onAddDeleteProductMultipleWarehouse
+        onAddDeleteProductMultipleWarehouse,
+        onAddDeleteProductWarehouse
     }
 }

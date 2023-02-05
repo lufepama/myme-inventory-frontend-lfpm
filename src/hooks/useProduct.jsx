@@ -2,8 +2,9 @@ import React, { useEffect, useContext } from 'react'
 import ProductContext from '../context/ProductContext'
 import { getProducts } from '../helper/product'
 import Cookies from 'js-cookie'
-import { createProduct, deleteProduct } from '../helper/product'
+import { createProduct, deleteProduct, deleteProductWarehouse } from '../helper/product'
 import { useModals } from './useModals'
+import { useWarehouse } from './useWarehouse'
 
 
 export const useProduct = () => {
@@ -52,7 +53,6 @@ export const useProduct = () => {
     }
 
     const updateSelectedProduct = (product) => {
-        console.log(product)
         setSelectedProduct(product)
     }
 
@@ -73,6 +73,6 @@ export const useProduct = () => {
         onDeleteProduct,
         updateSelectedProduct,
         resetSelectedProduct,
-        updateProductList
+        updateProductList,
     }
 }

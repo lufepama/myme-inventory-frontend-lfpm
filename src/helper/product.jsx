@@ -26,6 +26,19 @@ export const createProduct = async (token, product) => {
         .catch((err) => { console.log(err) })
 }
 
+export const createProductWarehouse = async (token, data) => {
+    return fetch(`${API}/wareproduct/create-product`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+        .then((res) => { return res.json() })
+        .catch((err) => { console.log(err) })
+}
+
 export const deleteProduct = async (token, productId) => {
     return fetch(`${API}/product/delete/${productId}`, {
         method: 'DELETE',
@@ -37,3 +50,16 @@ export const deleteProduct = async (token, productId) => {
         .then((res) => { return res.json() })
         .catch((err) => { console.log(err) })
 }
+
+export const deleteProductWarehouse = async (token, warehouseProductId) => {
+    return fetch(`${API}/wareproduct/delete-product/${warehouseProductId}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Token ${token}`
+        },
+    })
+        .then((res) => { return res.json() })
+        .catch((err) => { console.log(err) })
+}
+

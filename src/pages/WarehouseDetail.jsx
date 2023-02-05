@@ -1,13 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SidebarLayout from '../components/shared/SidebarLayout'
 import { useWarehouse } from '../hooks/useWarehouse'
 import ProductsTable from '../components/product/ProductsTable'
 import DeleteModal from '../components/shared/DeleteModal'
 import CreateProductModal from '../components/product/CreateProductModal'
+import { useProduct } from '../hooks/useProduct'
+import { useModals } from '../hooks/useModals'
+import ProductWarehouseTable from '../components/warehouse/ProductWarehouseTable'
+import CreateDeleteProductWarehouseModal from '../components/warehouse/CreateDeleteProductWarehouseModal'
 
 const WarehouseDetail = ({ params }) => {
 
-    const { fetchProductsWarehouse, selectedWarehouse, productsWarehouseList } = useWarehouse()
+    const { fetchProductsWarehouse, onAddDeleteProductWarehouse, selectedWarehouse, productsWarehouseList } = useWarehouse()
+    const { handleCloseDeleteModal, handleCloseCreateDeleteProductWarehouseModal } = useModals()
+    const { selectedProduct } = useProduct()
+
+    const handleCreateProductWarehouse = () => {
+        onAddDeleteProductWarehouse('Add')
+        handleCloseCreateDeleteProductWarehouseModal()
+    }
 
     useEffect(() => {
         fetchProductsWarehouse(params.id)
@@ -16,8 +27,8 @@ const WarehouseDetail = ({ params }) => {
     return (
         <SidebarLayout>
             <div className='flex flex-col pl-14 pr-14'>
-                <DeleteModal />
-                <CreateProductModal />
+                <DeleteModal isProduct={selectedProduct} target={selectedProduct} onCancel={() => handleCloseDeleteModal()} onDelete={() => { onAddDeleteProductWarehouse('Del') }} />
+                <CreateDeleteProductWarehouseModal isCreate={true} onSubmit={() => handleCreateProductWarehouse()} />
                 <h1 className='font-bold text-3xl text-center'>Warehouse detail</h1>
                 <div className='flex flex-row  mt-5'>
                     <div className='p-5'>
@@ -39,7 +50,7 @@ const WarehouseDetail = ({ params }) => {
                         <span className='mr-3 text-xl font-semibold'>{selectedWarehouse?.phoneNumber}</span>
                     </div>
                 </div>
-                <ProductsTable productList={productsWarehouseList} />
+                <ProductWarehouseTable productList={productsWarehouseList} />
             </div>
         </SidebarLayout>
     )
