@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons'
 import { useModals } from '../../hooks/useModals';
 import Button from '@mui/material/Button';
-import { useProduct } from '../../hooks/useProduct';
 
 const style = {
     position: 'absolute',
@@ -22,6 +21,7 @@ const style = {
 
 const DeleteModal = ({ isProduct = false, target, onCancel, onDelete }) => {
 
+    //Destructuring  of neccesary data and methods
     const { openDeleteModal } = useModals()
 
     return (

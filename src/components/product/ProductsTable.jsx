@@ -90,10 +90,10 @@ export default function ProductsTable({ productList }) {
                     : null
             }
 
-            <Paper sx={{
+            <Paper className='paper-container' sx={{
                 width: '100%', height: '300px',
                 overflowY: 'scroll', marginTop: '20px', scrollBehavior: 'auto',
-                overflowX: 'none', borderWidth: '0px'
+                overflowX: 'none',
             }}>
 
                 <TableContainer className='h-full' component={Paper}>
@@ -133,7 +133,6 @@ export default function ProductsTable({ productList }) {
                             : null
                     }
                 </TableContainer>
-
             </Paper>
         </>
     );

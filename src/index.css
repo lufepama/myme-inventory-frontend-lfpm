@@ -46,6 +46,13 @@
 }
 
 .css-757jl3-MuiPaper-root,
-.css-fb9y8i-MuiPaper-root {
+.css-fb9y8i-MuiPaper-root,
+.css-kgm4xz-MuiPaper-root,
+.css-11xur9t-MuiPaper-root-MuiTableContainer-root {
     box-shadow: none !important;
+}
+
+.paper-container::-webkit-scrollbar {
+    display: none;
+    /* for Chrome, Safari, and Opera */
 }

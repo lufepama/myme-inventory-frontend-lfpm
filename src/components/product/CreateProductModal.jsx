@@ -8,7 +8,6 @@ import { useModals } from '../../hooks/useModals';
 import { useProduct } from '../../hooks/useProduct';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
-import { isMuiElement } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -50,8 +49,8 @@ const CreateProductModal = () => {
     }
 
     const handleCancel = () => {
-        handleCloseCreateProductModal()
         setIsError(false)
+        handleCloseCreateProductModal()
         setProductData({ name: '', description: '', price: 0 })
     }
 
@@ -99,8 +98,6 @@ const CreateProductModal = () => {
                                         ? <Alert severity="error">Name field is required</Alert>
                                         : null
                                 }
-
-
                             </div>
                             <div className='flex flex-row-reverse mt-10'>
                                 <Button style={{ marginLeft: '7px' }} onClick={() => { handleCancel() }} variant="outlined" color="error">

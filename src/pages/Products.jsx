@@ -8,20 +8,19 @@ import { useModals } from '../hooks/useModals'
 
 const Products = () => {
 
-    const { fetchProducts, productList,
-        selectedProduct, onDeleteProduct,
-        resetAlertMessages
-    } = useProduct()
+    //Destructuring  of neccesary data and methods
+    const { productList, selectedProduct, onDeleteProduct, fetchProducts, resetAlertMessages } = useProduct()
     const { handleCloseDeleteModal } = useModals()
 
     useEffect(() => {
+        //Before mount, need to recover products and reset alert messages in case there is any
         resetAlertMessages()
         fetchProducts()
     }, [])
 
     return (
         <SidebarLayout>
-            <div className='flex h-screen flex-col flex-col pl-14 pr-14'>
+            <div className='flex h-full flex-col flex-col pl-14 pr-14'>
                 <DeleteModal isProduct={true} target={selectedProduct} onCancel={() => { handleCloseDeleteModal() }} onDelete={() => { onDeleteProduct() }} />
                 <CreateProductModal />
                 <h1 className='font-bold text-3xl text-center'>Products</h1>

@@ -27,6 +27,7 @@ const style = {
 
 const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
 
+    //Destructuring  of neccesary data and methods
     const { openCreateDeleteProductWarehouseModal, handleCloseCreateDeleteProductWarehouseModal } = useModals()
     const { productList, updateSelectedProduct } = useProduct()
     const [productData, setProductData] = useState({
@@ -39,13 +40,13 @@ const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
 
     const { id, name, description, price, amount } = productData
 
+    //Manages the change of state
     const handleChange = (name) =>
         (event) => {
             setProductData({ ...productData, [name]: event.target.value })
-
         };
 
-
+    //Update selected product and fill input values according to selected product
     const handleSeletedProductInput = (product) => {
         const prodData = {
             id: product.id,

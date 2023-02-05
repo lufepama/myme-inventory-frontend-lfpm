@@ -11,14 +11,18 @@ import { useProduct } from '../hooks/useProduct'
 
 const Warehouses = () => {
 
-    const { selectedWarehouse, onDeleteWarehouse, fetchWarehouses,
-        onAddDeleteProductMultipleWarehouse, temporalWarehouseList,
-        resetAlertMessages, resetTemporalWarehouseList
+    //Destructuring  of neccesary data and methods
+    const { selectedWarehouse, temporalWarehouseList, onDeleteWarehouse,
+        fetchWarehouses, onAddDeleteProductMultipleWarehouse, resetAlertMessages, resetTemporalWarehouseList
     } = useWarehouse()
     const { fetchProducts } = useProduct()
     const { handleOpenCreateDeleteProductWarehouseModal, handleCloseDeleteModal } = useModals()
     const [isCreate, setIsCreate] = useState(true)
 
+
+    //Methods
+
+    //Method that helps to open modal for create or delete product in selected warehouses
     const handleCreateDeleteModalChange = (value) => {
         handleOpenCreateDeleteProductWarehouseModal()
         setIsCreate(value)
@@ -30,6 +34,9 @@ const Warehouses = () => {
     }
 
     useEffect(() => {
+        //Before mount, need to recover products and warehouses
+        // and reset alert messages in case there is any.
+        //When component  unmount, the temporal warehouse list is reset
         fetchProducts()
         resetAlertMessages()
         fetchWarehouses()
@@ -40,7 +47,7 @@ const Warehouses = () => {
 
     return (
         <SidebarLayout>
-            <div className='flex flex-col  h-screen flex-col pl-14 pr-14'>
+            <div className='flex flex-col  h-full flex-col pl-14 pr-14'>
                 <DeleteModal isProduct={false} target={selectedWarehouse} onCancel={() => { handleCloseDeleteModal() }} onDelete={() => { onDeleteWarehouse() }} />
                 <CreateWarehouseModal />
                 <CreateDeleteProductWarehouseModal isCreate={isCreate} onSubmit={handleCreateAndDelete} />
@@ -56,7 +63,6 @@ const Warehouses = () => {
                             Delete product
                         </Button>
                     </div>
-
                 </div>
             </div>
         </SidebarLayout>

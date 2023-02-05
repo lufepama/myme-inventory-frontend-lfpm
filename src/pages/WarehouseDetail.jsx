@@ -54,7 +54,6 @@ const WarehouseDetail = ({ params }) => {
                         </div>
                     </div>
                 </div>
-
                 <ProductWarehouseTable productList={productsWarehouseList} />
             </div>
         </SidebarLayout>

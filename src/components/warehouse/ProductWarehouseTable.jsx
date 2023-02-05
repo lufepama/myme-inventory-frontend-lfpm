@@ -91,10 +91,10 @@ export default function ProductWarehouseTable({ productList }) {
                     : null
             }
 
-            <Paper sx={{
+            <Paper className='paper-container' sx={{
                 width: '100%', height: '300px',
                 overflowY: 'scroll', marginTop: '20px', scrollBehavior: 'auto',
-                overflowX: 'none',
+                overflowX: 'none', scrollbarWidth: 'none'
             }}>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -103,7 +103,7 @@ export default function ProductWarehouseTable({ productList }) {
                                 <StyledTableCell>id</StyledTableCell>
                                 <StyledTableCell align="left">Name</StyledTableCell>
                                 <StyledTableCell align="left">Description</StyledTableCell>
-                                <StyledTableCell align="right">Price</StyledTableCell>
+                                <StyledTableCell align="right">Price ($)</StyledTableCell>
                                 <StyledTableCell align="right">Amount</StyledTableCell>
                                 <StyledTableCell align="right">Action</StyledTableCell>
                             </TableRow>

@@ -49,9 +49,13 @@ export const useWarehouse = () => {
         if (csrftoken) {
             const res = await createWarehouse(csrftoken, warehouse)
             if (res.success) {
-                const newWarehouse = res.data
+                const newWarehouseData = res.data
+                const fortmatNewWarehouse = {
+                    ...newWarehouseData,
+                    phoneNumber: newWarehouseData.phone_number
+                }
                 setWarehouseStatus({ isCreated: true, isDeleted: false })
-                setWarehouseList([...warehouseList, newWarehouse])
+                setWarehouseList([...warehouseList, fortmatNewWarehouse])
                 handleCloseCreateWarehouseModal()
             }
         }
@@ -144,7 +148,6 @@ export const useWarehouse = () => {
     const resetTemporalWarehouseList = () => {
         setTemporalWarehouseList([])
     }
-
 
     return {
         warehouseList,

@@ -7,15 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import FilterInput from '../shared/FilterInput';
 import Button from '@mui/material/Button';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import { useWarehouse } from '../../hooks/useWarehouse'
 import { useModals } from '../../hooks/useModals';
-import Checkbox from '@mui/material/Checkbox';
-import { useLocation } from 'wouter';
 import Alert from '@mui/material/Alert';
 import WarehouseCell from './WarehouseCell';
 
@@ -40,15 +35,18 @@ function createmyData(id, name, description, address, country, phoneNumber) {
     return { id, name, description, address, country, phoneNumber }
 }
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function WarehousesTable() {
 
+    //Destructuring  of neccesary data and methods
     const { warehouseList, warehouseStatus } = useWarehouse()
     const { handleOpenCreateWarehouseModal, } = useModals()
     const [rows, setRows] = useState([])
     const { isCreated, isDeleted } = warehouseStatus
 
+    //Methods
+
+    //Fills rows of table according to warehouse list items.
     const fillRows = () => {
         let tempRows = []
         warehouseList.forEach((item) => {
@@ -61,7 +59,6 @@ export default function WarehousesTable() {
     const handleCreateWarehouse = () => {
         handleOpenCreateWarehouseModal()
     }
-
 
     useEffect(() => {
         fillRows()
@@ -89,7 +86,7 @@ export default function WarehousesTable() {
                     ? <Alert className='mt-5' severity="success">Warehouse <span className='font-bold'>deleted</span> successfully</Alert>
                     : null
             }
-            <Paper sx={{
+            <Paper className='paper-container' sx={{
                 width: '100%', height: '300px',
                 overflowY: 'scroll', marginTop: '20px', scrollBehavior: 'auto',
                 overflowX: 'none',

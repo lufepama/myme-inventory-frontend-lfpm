@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import { useModals } from '../../hooks/useModals';
 import { useWarehouse } from '../../hooks/useWarehouse';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
 
 const style = {
     position: 'absolute',
@@ -23,6 +24,7 @@ const style = {
 
 const CreateWarehouseModal = () => {
 
+    //Destructuring  of neccesary data and methods
     const { openCreateWarehouseModal, handleCloseCreateWarehouseModal } = useModals()
     const { onAddWarehouse } = useWarehouse()
     const [warehouseData, setWarehouseData] = useState({
@@ -36,22 +38,39 @@ const CreateWarehouseModal = () => {
 
     const { name, description, address, country, phone_number } = warehouseData
 
+    //Methods
+
+    //Manages the change of state values
     const handleChange = (name) =>
         (event) => {
             setWarehouseData({ ...warehouseData, [name]: event.target.value })
         };
 
+    //Before close modal it is required to clean up input fields
+    const resetWarehouseData = () => {
+        setWarehouseData({
+            name: '',
+            description: '',
+            address: '',
+            country: '',
+            phone_number: ''
+        })
+    }
+
+    //Manages the action when cancel btn in modal is pressed
     const handleCancel = () => {
+        resetWarehouseData()
+        setIsError(false)
         handleCloseCreateWarehouseModal()
     }
 
+    //Manages the creation of new warehouse conditioned by name value
     const handleWarehouseCreate = () => {
         if (name != '') {
-            onAddWarehoucse(warehouseData)
+            onAddWarehouse(warehouseData)
+            resetWarehouseData()
             setIsError(false)
-        } else {
-            setIsError(true)
-        }
+        } else setIsError(true)
     }
 
 
@@ -81,8 +100,8 @@ const CreateWarehouseModal = () => {
                                     />
                                     <TextField
                                         placeholder='Description'
-                                        hidden={true}
-                                        name={description}
+                                        name='description'
+                                        value={description}
                                         onChange={handleChange('description')}
                                         className='bg-gray-200 rounded-md  w-full'
                                     />
@@ -95,16 +114,16 @@ const CreateWarehouseModal = () => {
                                     />
                                     <TextField
                                         placeholder='Country'
-                                        hidden={true}
-                                        name={country}
+                                        name='country'
+                                        value={country}
                                         onChange={handleChange('country')}
                                         className='bg-gray-200 rounded-md mt-3 w-full'
                                     />
                                     <TextField
                                         placeholder='Phone'
+                                        name='phone_number'
                                         type={'number'}
-                                        hidden={true}
-                                        name={phone_number}
+                                        value={phone_number}
                                         onChange={handleChange('phone_number')}
                                         className='bg-gray-200 rounded-md mt-3 w-full'
                                     />
@@ -112,7 +131,7 @@ const CreateWarehouseModal = () => {
                             </div>
                             {
                                 isError
-                                    ? <h1>Name field is required</h1>
+                                    ? <Alert severity="error">Name field is required</Alert>
                                     : null
                             }
                             <div className='flex flex-row-reverse mt-10'>

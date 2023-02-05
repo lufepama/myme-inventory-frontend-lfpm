@@ -14,6 +14,10 @@ import { ProductProvider } from './context/ProductContext';
 import { ModalsProvider } from './context/ModalsContext';
 import { WarehouseProvider } from './context/WarehouseContext';
 
+
+//All components are wrapped within all provides instansed of the app
+//For simplicity
+
 const Routes = () => {
     return (
         <ProSidebarProvider>
