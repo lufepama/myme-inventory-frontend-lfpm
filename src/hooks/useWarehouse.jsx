@@ -10,7 +10,8 @@ export const useWarehouse = () => {
     const { warehouseList, setWarehouseList,
         productsWarehouseList, setProductsWarehouseList,
         selectedWarehouse, setSelectedWarehouse,
-        warehouseStatus, setWarehouseStatus
+        warehouseStatus, setWarehouseStatus,
+        temporalWarehouseList, setTemporalWarehouseList
     } = useContext(WarehouseContext)
     const { handleCloseCreateWarehouseModal, handleCloseDeleteModal } = useModals()
 
@@ -68,15 +69,26 @@ export const useWarehouse = () => {
         setSelectedWarehouse(warehouse)
     }
 
+    const updateTemporalWarehouseList = (warehouse, action) => {
+        if (action == 'Add') {
+            setTemporalWarehouseList([...temporalWarehouseList, warehouse])
+        } else if (action == 'Del' && temporalWarehouseList.includes(warehouse)) {
+            const filteredList = temporalWarehouseList.filter(item => item.id != warehouse.id)
+            setTemporalWarehouseList(filteredList)
+        }
+    }
+
     return {
         warehouseList,
         productsWarehouseList,
         selectedWarehouse,
         warehouseStatus,
+        temporalWarehouseList,
         fetchWarehouses,
         fetchProductsWarehouse,
         updateSelectedWarehouse,
         onAddWarehouse,
-        onDeleteWarehouse
+        onDeleteWarehouse,
+        updateTemporalWarehouseList
     }
 }

@@ -13,13 +13,15 @@ export const WarehouseProvider = ({ children }) => {
         isCreated: false,
         isDeleted: false
     })
+    const [temporalWarehouseList, setTemporalWarehouseList] = useState([])
 
     return (
         <Context.Provider value={{
             warehouseList, setWarehouseList,
             productsWarehouseList, setProductsWarehouseList,
             selectedWarehouse, setSelectedWarehouse,
-            warehouseStatus, setWarehouseStatus
+            warehouseStatus, setWarehouseStatus,
+            temporalWarehouseList, setTemporalWarehouseList
         }} >
             {children}
         </Context.Provider>

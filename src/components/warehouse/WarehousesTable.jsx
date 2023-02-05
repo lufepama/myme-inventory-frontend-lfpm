@@ -17,6 +17,7 @@ import { useModals } from '../../hooks/useModals';
 import Checkbox from '@mui/material/Checkbox';
 import { useLocation } from 'wouter';
 import Alert from '@mui/material/Alert';
+import WarehouseCell from './WarehouseCell';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -43,9 +44,9 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function WarehousesTable() {
 
-    const { warehouseList, warehouseStatus, updateSelectedWarehouse } = useWarehouse()
+    const { warehouseList, warehouseStatus, temporalWarehouseList } = useWarehouse()
     const [_, navigate] = useLocation()
-    const { handleOpenCreateWarehouseModal, handleOpenDeleteModal } = useModals()
+    const { handleOpenCreateWarehouseModal, } = useModals()
     const [rows, setRows] = useState([])
     const { isCreated, isDeleted } = warehouseStatus
 
@@ -58,20 +59,10 @@ export default function WarehousesTable() {
         setRows(tempRows)
     }
 
-    //TODO: Add temporal item
-    const handleDeleteWarehouse = (warehouse) => {
-        updateSelectedWarehouse(warehouse)
-        handleOpenDeleteModal()
-    }
-
     const handleCreateWarehouse = () => {
         handleOpenCreateWarehouseModal()
     }
 
-    const handleRedirect = (warehouse) => {
-        updateSelectedWarehouse(warehouse)
-        navigate('/warehouses/2/')
-    }
 
     useEffect(() => {
         fillRows()
@@ -83,6 +74,7 @@ export default function WarehousesTable() {
                 <div className='w-1/3 h-12'>
                     <FilterInput placeholder={'Search warehouse...'} />
                 </div>
+                {temporalWarehouseList.length}
                 <Button
                     variant="contained"
                     endIcon={<WidgetsIcon />}
@@ -122,25 +114,7 @@ export default function WarehousesTable() {
                         </TableHead>
                         <TableBody className='bg-table-color'>
                             {rows.map((row) => (
-                                <StyledTableRow key={row.id} className='bg-table-color'>
-                                    <StyledTableCell className='cursor-pointer' align="left">
-                                        <Checkbox  {...label} />
-                                    </StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.id}</StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.name}</StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >
-                                        {row.description}
-                                    </StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="left">{row.address}</StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="center">{row.country}</StyledTableCell>
-                                    <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="right">{row.phoneNumber}</StyledTableCell>
-                                    <StyledTableCell align="right">
-                                        <FontAwesomeIcon
-                                            className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
-                                            onClick={() => handleDeleteWarehouse(row)}
-                                        />
-                                    </StyledTableCell>
-                                </StyledTableRow>
+                                <WarehouseCell key={row.id} row={row} />
                             ))}
                         </TableBody>
                     </Table>
@@ -154,3 +128,26 @@ export default function WarehousesTable() {
         </>
     );
 }
+
+{/* <StyledTableRow key={row.id} className='bg-table-color'> */ }
+
+{/* <WarehouseCell row={row} onClick={handleRedirect(row)} onDelete={handleDeleteWarehouse(row)} /> */ }
+
+{/* <StyledTableCell className='cursor-pointer' align="left">
+    <Checkbox  {...label} />
+</StyledTableCell>
+<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.id}</StyledTableCell>
+<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.name}</StyledTableCell>
+<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >
+    {row.description}
+</StyledTableCell>
+<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="left">{row.address}</StyledTableCell>
+<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="center">{row.country}</StyledTableCell>
+<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="right">{row.phoneNumber}</StyledTableCell>
+<StyledTableCell align="right">
+    <FontAwesomeIcon
+        className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
+        onClick={() => handleDeleteWarehouse(row)}
+    />
+</StyledTableCell>
+</StyledTableRow> */}
