@@ -134,6 +134,17 @@ export const useWarehouse = () => {
         }
     }
 
+    const resetAlertMessages = () => {
+        setWarehouseStatus({
+            isCreated: false,
+            isDeleted: false
+        })
+    }
+
+    const resetTemporalWarehouseList = () => {
+        setTemporalWarehouseList([])
+    }
+
 
     return {
         warehouseList,
@@ -148,6 +159,8 @@ export const useWarehouse = () => {
         onDeleteWarehouse,
         updateTemporalWarehouseList,
         onAddDeleteProductMultipleWarehouse,
-        onAddDeleteProductWarehouse
+        onAddDeleteProductWarehouse,
+        resetAlertMessages,
+        resetTemporalWarehouseList
     }
 }

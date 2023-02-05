@@ -31,26 +31,30 @@ const WarehouseDetail = ({ params }) => {
                 <DeleteModal isProduct={selectedProduct} target={selectedProduct} onCancel={() => handleCloseDeleteModal()} onDelete={() => { onAddDeleteProductWarehouse('Del') }} />
                 <CreateDeleteProductWarehouseModal isCreate={true} onSubmit={handleCreateProductWarehouse} />
                 <h1 className='font-bold text-3xl text-center'>Warehouse detail</h1>
-                <div className='flex flex-row  mt-5'>
-                    <div className='p-5'>
-                        <span className='mr-3 text-xl font-bold'>Name: </span>
-                        <span className='mr-3 text-xl font-semibold'>{selectedWarehouse?.name}</span>
+                <h1 className='-mb-5 mt-5 p-3 text-2xl font-semibold'>Warehouse info:</h1>
+                <div className='flex flex-row'>
+                    <div className='flex flex-row'>
+                        <div className='p-5'>
+                            <span className='mr-3 text-xl font-bold'>Name: </span>
+                            <span className='mr-3 text-xl font-semibold'>{selectedWarehouse?.name}</span>
+                        </div>
+                        <div className='p-5'>
+                            <span className='mr-3 text-xl font-bold'>Country: </span>
+                            <span className='mr-3 text-xl font-semibold'>{selectedWarehouse?.country}</span>
+                        </div>
                     </div>
-                    <div className='p-5'>
-                        <span className='mr-3 text-xl font-bold'>Country: </span>
-                        <span className='mr-3 text-xl font-semibold'>{selectedWarehouse?.country}</span>
+                    <div className='flex flex-row ml-10'>
+                        <div className='p-5'>
+                            <span className='mr-3 text-xl font-bold'>Address: </span>
+                            <span className='mr-3 text-xl font-semibold'>{selectedWarehouse?.address}</span>
+                        </div>
+                        <div className='p-5'>
+                            <span className='mr-3 text-xl font-bold'>Phone: </span>
+                            <span className='mr-3 text-xl font-semibold'>{selectedWarehouse?.phoneNumber}</span>
+                        </div>
                     </div>
                 </div>
-                <div className='flex flex-row mt-5'>
-                    <div className='p-5'>
-                        <span className='mr-3 text-xl font-bold'>Address: </span>
-                        <span className='mr-3 text-xl font-semibold'>{selectedWarehouse?.address}</span>
-                    </div>
-                    <div className='p-5'>
-                        <span className='mr-3 text-xl font-bold'>Phone: </span>
-                        <span className='mr-3 text-xl font-semibold'>{selectedWarehouse?.phoneNumber}</span>
-                    </div>
-                </div>
+
                 <ProductWarehouseTable productList={productsWarehouseList} />
             </div>
         </SidebarLayout>

@@ -30,11 +30,11 @@ const CreateWarehouseModal = () => {
         description: '',
         address: '',
         country: '',
-        phone: null
+        phone_number: ''
     })
     const [isError, setIsError] = useState(false)
 
-    const { name, description, address, country, phone } = warehouseData
+    const { name, description, address, country, phone_number } = warehouseData
 
     const handleChange = (name) =>
         (event) => {
@@ -47,7 +47,7 @@ const CreateWarehouseModal = () => {
 
     const handleWarehouseCreate = () => {
         if (name != '') {
-            onAddWarehouse(warehouseData)
+            onAddWarehoucse(warehouseData)
             setIsError(false)
         } else {
             setIsError(true)
@@ -104,12 +104,17 @@ const CreateWarehouseModal = () => {
                                         placeholder='Phone'
                                         type={'number'}
                                         hidden={true}
-                                        name={phone}
-                                        onChange={handleChange('phone')}
+                                        name={phone_number}
+                                        onChange={handleChange('phone_number')}
                                         className='bg-gray-200 rounded-md mt-3 w-full'
                                     />
                                 </div>
                             </div>
+                            {
+                                isError
+                                    ? <h1>Name field is required</h1>
+                                    : null
+                            }
                             <div className='flex flex-row-reverse mt-10'>
                                 <Button style={{ marginLeft: '7px' }} onClick={() => { handleCancel() }} variant="outlined" color="error">
                                     Cancel

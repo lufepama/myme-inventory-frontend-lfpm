@@ -148,7 +148,10 @@ const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
                                 }} variant="outlined" color="error">
                                     Cancel
                                 </Button>
-                                <Button onClick={() => { onSubmit(amount) }} style={{ marginRight: '7px' }} variant="contained" color="primary">
+                                <Button onClick={() => {
+                                    onSubmit(amount)
+                                    handleCloseCreateDeleteProductWarehouseModal()
+                                }} style={{ marginRight: '7px' }} variant="contained" color="primary">
                                     {
                                         isCreate ? 'Create' : 'Delete'
                                     }

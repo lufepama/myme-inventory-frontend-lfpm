@@ -70,7 +70,7 @@ export default function ProductWarehouseTable({ productList }) {
 
     return (
         <>
-            <div className='w-full mt-20 flex flex-row justify-between'>
+            <div className='w-full mt-8 flex flex-row justify-between'>
                 <Button
                     variant="contained"
                     endIcon={<WidgetsIcon />}

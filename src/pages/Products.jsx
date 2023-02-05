@@ -9,24 +9,13 @@ import { useModals } from '../hooks/useModals'
 const Products = () => {
 
     const { fetchProducts, productList,
-        selectedProduct, onDeleteProduct
+        selectedProduct, onDeleteProduct,
+        resetAlertMessages
     } = useProduct()
     const { handleCloseDeleteModal } = useModals()
-    const [query, setQuery] = useState('')
-    const [filteredList, setFilteredList] = useState(productList)
-
-    const handleInputChange = (e) => {
-        setQuery(e.target.value)
-        const results = productList.filter(product => {
-            if (e.target.value == "") {
-                return productList
-            }
-            return product?.name.toLowerCase().includes(e.target.value.toLowerCase())
-        })
-        setFilteredList(results)
-    }
 
     useEffect(() => {
+        resetAlertMessages()
         fetchProducts()
     }, [])
 

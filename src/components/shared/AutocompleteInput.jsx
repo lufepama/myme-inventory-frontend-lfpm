@@ -19,7 +19,7 @@ export default function AutocompleteInput({ productList, handleSeletedProductInp
                     },
                 }}
                 id="custom-input-demo"
-                noOptionsText="Product not found..."
+                noOptionsText={`${productList.length == 0 ? 'Product list empty' : 'Product not found...'} `}
                 options={productList}
                 onChange={(e, value) => handleSeletedProductInput(value)}
                 getOptionLabel={(option) => option.name}

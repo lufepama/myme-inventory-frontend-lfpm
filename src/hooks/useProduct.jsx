@@ -64,6 +64,13 @@ export const useProduct = () => {
         setProductList(productList)
     }
 
+    const resetAlertMessages = () => {
+        setProductStatus({
+            isCreated: false,
+            isDeleted: false
+        })
+    }
+
     return {
         productList,
         productStatus,
@@ -75,5 +82,6 @@ export const useProduct = () => {
         updateSelectedProduct,
         resetSelectedProduct,
         updateProductList,
+        resetAlertMessages
     }
 }

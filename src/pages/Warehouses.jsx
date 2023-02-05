@@ -7,11 +7,15 @@ import CreateWarehouseModal from '../components/warehouse/CreateWarehouseModal'
 import Button from '@mui/material/Button';
 import CreateDeleteProductWarehouseModal from '../components/warehouse/CreateDeleteProductWarehouseModal'
 import { useModals } from '../hooks/useModals'
+import { useProduct } from '../hooks/useProduct'
 
 const Warehouses = () => {
 
-    const { selectedWarehouse, onDeleteWarehouse, fetchWarehouses, onAddDeleteProductMultipleWarehouse, temporalWarehouseList
+    const { selectedWarehouse, onDeleteWarehouse, fetchWarehouses,
+        onAddDeleteProductMultipleWarehouse, temporalWarehouseList,
+        resetAlertMessages, resetTemporalWarehouseList
     } = useWarehouse()
+    const { fetchProducts } = useProduct()
     const { handleOpenCreateDeleteProductWarehouseModal, handleCloseDeleteModal } = useModals()
     const [isCreate, setIsCreate] = useState(true)
 
@@ -21,17 +25,17 @@ const Warehouses = () => {
     }
 
     const handleCreateAndDelete = (amount) => {
-        if (isCreate) {
-            onAddDeleteProductMultipleWarehouse('Add', amount)
-        }
-        else {
-            onAddDeleteProductMultipleWarehouse('Del')
-        }
+        if (isCreate) onAddDeleteProductMultipleWarehouse('Add', amount)
+        else onAddDeleteProductMultipleWarehouse('Del')
     }
 
-
     useEffect(() => {
+        fetchProducts()
+        resetAlertMessages()
         fetchWarehouses()
+        return () => {
+            resetTemporalWarehouseList()
+        }
     }, [])
 
     return (
