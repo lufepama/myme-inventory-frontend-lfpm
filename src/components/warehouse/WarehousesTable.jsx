@@ -44,8 +44,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function WarehousesTable() {
 
-    const { warehouseList, warehouseStatus, temporalWarehouseList } = useWarehouse()
-    const [_, navigate] = useLocation()
+    const { warehouseList, warehouseStatus } = useWarehouse()
     const { handleOpenCreateWarehouseModal, } = useModals()
     const [rows, setRows] = useState([])
     const { isCreated, isDeleted } = warehouseStatus
@@ -74,7 +73,6 @@ export default function WarehousesTable() {
                 <div className='w-1/3 h-12'>
                     <FilterInput placeholder={'Search warehouse...'} />
                 </div>
-                {temporalWarehouseList.length}
                 <Button
                     variant="contained"
                     endIcon={<WidgetsIcon />}
@@ -119,35 +117,7 @@ export default function WarehousesTable() {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                {
-                    warehouseList.length == 0
-                        ? <h1>No warehouses found</h1>
-                        : null
-                }
             </Paper>
         </>
     );
 }
-
-{/* <StyledTableRow key={row.id} className='bg-table-color'> */ }
-
-{/* <WarehouseCell row={row} onClick={handleRedirect(row)} onDelete={handleDeleteWarehouse(row)} /> */ }
-
-{/* <StyledTableCell className='cursor-pointer' align="left">
-    <Checkbox  {...label} />
-</StyledTableCell>
-<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.id}</StyledTableCell>
-<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >{row.name}</StyledTableCell>
-<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} >
-    {row.description}
-</StyledTableCell>
-<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="left">{row.address}</StyledTableCell>
-<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="center">{row.country}</StyledTableCell>
-<StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="right">{row.phoneNumber}</StyledTableCell>
-<StyledTableCell align="right">
-    <FontAwesomeIcon
-        className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
-        onClick={() => handleDeleteWarehouse(row)}
-    />
-</StyledTableCell>
-</StyledTableRow> */}

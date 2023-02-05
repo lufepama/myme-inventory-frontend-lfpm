@@ -43,10 +43,10 @@ const DeleteModal = ({ isProduct = false, target, onCancel, onDelete }) => {
                                 {target?.name}</span> {isProduct ? 'product' : 'warehouse'} with and id of <span className='font-bold'>{target?.id}</span>.
                             </p>
                             <div className='flex flex-row-reverse mt-10'>
-                                <Button onClick={() => { onCancel() }} style={{ marginLeft: '7px' }} variant="contained" color="primary">
+                                <Button onClick={() => { onCancel() }} style={{ marginLeft: '7px' }} variant="outlined" color="error" >
                                     Cancel
                                 </Button>
-                                <Button onClick={() => { onDelete() }} variant="outlined" color="error">
+                                <Button onClick={() => { onDelete() }} variant="contained" color="primary">
                                     Delete
                                 </Button>
                             </div>

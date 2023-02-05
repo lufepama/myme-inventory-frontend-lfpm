@@ -43,7 +43,7 @@ const WarehouseCell = ({ row }) => {
 
     const handleRedirect = (warehouse) => {
         updateSelectedWarehouse(warehouse)
-        navigate('/warehouses/2/')
+        navigate(`/warehouses/${warehouse.id}/`)
     }
 
     const handleCheckboxChange = (e) => {

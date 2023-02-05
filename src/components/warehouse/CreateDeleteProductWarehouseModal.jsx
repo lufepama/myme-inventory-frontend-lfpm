@@ -25,7 +25,7 @@ const style = {
     p: 4,
 };
 
-const CreateDeleteProductWarehouseModal = () => {
+const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
 
     const { openCreateDeleteProductWarehouseModal, handleCloseCreateDeleteProductWarehouseModal } = useModals()
     const { productList, updateSelectedProduct } = useProduct()
@@ -45,14 +45,15 @@ const CreateDeleteProductWarehouseModal = () => {
 
 
     const handleSeletedProductInput = (product) => {
-        updateSelectedProduct(product)
-        setProductData({
+        const prodData = {
             id: product.id,
             name: product.name,
             description: product.description,
             price: product.price,
             amount: amount
-        })
+        }
+        updateSelectedProduct(prodData)
+        setProductData(prodData)
     }
 
     return (
@@ -139,12 +140,17 @@ const CreateDeleteProductWarehouseModal = () => {
                                 </div>
                             </div>
                             <div className='flex flex-row-reverse mt-10'>
-                                <Button onClick={() => { handleCloseCreateDeleteProductWarehouseModal() }} style={{ marginLeft: '7px' }} variant="contained" color="primary">
+                                <Button onClick={() => {
+                                    handleCloseCreateDeleteProductWarehouseModal()
+                                }} variant="outlined" color="error">
                                     Cancel
                                 </Button>
-                                <Button variant="outlined" color="error">
-                                    Delete
+                                <Button onClick={() => { onSubmit(amount) }} style={{ marginRight: '7px' }} variant="contained" color="primary">
+                                    {
+                                        isCreate ? 'Create' : 'Delete'
+                                    }
                                 </Button>
+
                             </div>
                         </div>
                     </div>

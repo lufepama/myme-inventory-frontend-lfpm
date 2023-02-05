@@ -8,24 +8,28 @@ import WidgetsIcon from '@mui/icons-material/Widgets';
 import Button from '@mui/material/Button';
 import CreateDeleteProductWarehouseModal from '../components/warehouse/CreateDeleteProductWarehouseModal'
 import { useModals } from '../hooks/useModals'
+import { useProduct } from '../hooks/useProduct'
 
 const Warehouses = () => {
 
-    const { selectedWarehouse, onDeleteWarehouse, fetchWarehouses, warehouseList } = useWarehouse()
+    const { selectedWarehouse, onDeleteWarehouse, fetchWarehouses, onAddDeleteProductMultipleWarehouse, temporalWarehouseList
+    } = useWarehouse()
     const { handleOpenCreateDeleteProductWarehouseModal, handleCloseDeleteModal } = useModals()
-    const [filteredList, setFilteredList] = useState(warehouseList)
-    const [query, setQuery] = useState('')
+    const [isCreate, setIsCreate] = useState(true)
 
-    // const handleInputChange = (e) => {
-    //     setQuery(e.target.value)
-    //     const results = warehouseList.filter(product => {
-    //         if (e.target.value == "") {
-    //             return warehouseList
-    //         }
-    //         return product?.name.toLowerCase().includes(e.target.value.toLowerCase())
-    //     })
-    //     setFilteredList(results)
-    // }
+    const handleCreateDeleteModalChange = (value) => {
+        handleOpenCreateDeleteProductWarehouseModal()
+        setIsCreate(value)
+    }
+
+    const handleCreateAndDelete = () => {
+        if (isCreate) {
+            onAddDeleteProductMultipleWarehouse('Add')
+        }
+        else {
+            onAddDeleteProductMultipleWarehouse('Del')
+        }
+    }
 
 
     useEffect(() => {
@@ -37,15 +41,15 @@ const Warehouses = () => {
             <div className='flex flex-col  h-screen flex-col pl-14 pr-14'>
                 <DeleteModal isProduct={false} target={selectedWarehouse} onCancel={() => { handleCloseDeleteModal() }} onDelete={() => { onDeleteWarehouse() }} />
                 <CreateWarehouseModal />
-                <CreateDeleteProductWarehouseModal />
+                <CreateDeleteProductWarehouseModal isCreate={isCreate} onSubmit={() => handleCreateAndDelete()} />
                 <h1 className='font-bold text-3xl text-center'>Warehouses</h1>
                 <div className='h-1/2'>
                     <WarehousesTable />
                     <div className='w-80 flex flex-row justify-between mt-5'>
-                        <Button variant="contained" onClick={() => handleOpenCreateDeleteProductWarehouseModal()}>Add product</Button>
-                        <Button variant="contained"
+                        <Button disabled={temporalWarehouseList.length > 0 ? false : true} variant="contained" onClick={() => handleCreateDeleteModalChange(true)}>Add product</Button>
+                        <Button disabled={temporalWarehouseList.length > 0 ? false : true} variant="contained"
                             color='error' className='ml-3'
-                            onClick={() => handleOpenCreateDeleteProductWarehouseModal()}
+                            onClick={() => handleCreateDeleteModalChange(false)}
                         >
                             Delete product
                         </Button>

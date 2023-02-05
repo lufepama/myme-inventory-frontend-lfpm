@@ -53,3 +53,28 @@ export const getProductsWarehouse = async (warehouseId, token) => {
         .catch((err) => { console.log(err) })
 }
 
+export const createProductMultipleWarehouses = async (token, data) => {
+    return fetch(`${API}/wareproduct/create-multiple-product`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+        .then((res) => { return res.json() })
+        .catch((err) => { console.log(err) })
+}
+
+export const deleteProductMultipleWarehouses = async (token, data) => {
+    return fetch(`${API}/wareproduct/delete-multiple-product`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+        .then((res) => { return res.json() })
+        .catch((err) => { console.log(err) })
+}

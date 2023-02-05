@@ -1,8 +1,12 @@
 import React, { useContext } from 'react'
 import WarehouseContext from '../context/WarehouseContext'
 import Cookies from 'js-cookie'
-import { getProductsWarehouse, getWarehouses, createWarehouse, deleteWarehouse } from '../helper/warehouse'
+import {
+    getProductsWarehouse, getWarehouses,
+    createWarehouse, deleteWarehouse, createProductMultipleWarehouses, deleteProductMultipleWarehouses
+} from '../helper/warehouse'
 import { useModals } from './useModals'
+import { useProduct } from './useProduct'
 
 
 export const useWarehouse = () => {
@@ -14,6 +18,7 @@ export const useWarehouse = () => {
         temporalWarehouseList, setTemporalWarehouseList
     } = useContext(WarehouseContext)
     const { handleCloseCreateWarehouseModal, handleCloseDeleteModal } = useModals()
+    const { selectedProduct } = useProduct()
 
     const csrftoken = Cookies.get('csrftoken')
 
@@ -78,6 +83,28 @@ export const useWarehouse = () => {
         }
     }
 
+    const onAddDeleteProductMultipleWarehouse = async (action) => {
+        let temporalWarehouseListId = []
+        temporalWarehouseList.map(item => temporalWarehouseListId.push(item.id))
+
+        if (csrftoken) {
+            const formatData = {
+                warehouseIdList: temporalWarehouseListId,
+                productId: selectedProduct.id,
+                amount: selectedProduct.amount
+            }
+            if (action == 'Add') {
+                const res = await createProductMultipleWarehouses(csrftoken, formatData)
+                console.log({ res })
+            } else if (action == 'Del') {
+                const res = await deleteProductMultipleWarehouses(csrftoken, formatData)
+                console.log({ res })
+            }
+
+        }
+    }
+
+
     return {
         warehouseList,
         productsWarehouseList,
@@ -89,6 +116,7 @@ export const useWarehouse = () => {
         updateSelectedWarehouse,
         onAddWarehouse,
         onDeleteWarehouse,
-        updateTemporalWarehouseList
+        updateTemporalWarehouseList,
+        onAddDeleteProductMultipleWarehouse
     }
 }
