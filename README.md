@@ -39,3 +39,5 @@ A modal will open where the product can be found based on its name. The 'Delete'
 8. Products can be deleted as in previous cases. The quantity of the products can be modified by clicking on the 'pen' icon.
 
 ![update quantity](https://user-images.githubusercontent.com/72669633/216877208-544fd1b0-ea52-4946-98e6-89a50d8c97f8.png)
+
+9. To log out, click on the last item in the sidebar. I will take you to login page.
