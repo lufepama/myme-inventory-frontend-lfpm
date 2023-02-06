@@ -40,7 +40,7 @@ const DeleteModal = ({ isProduct = false, target, onCancel, onDelete }) => {
                         </div>
                         <div className='p-2 flex flex-col'>
                             <p className='text-lg'>Are you sure you want to delete <span className='font-bold'>
-                                {target?.name}</span> {isProduct ? 'product' : 'warehouse'} with and id of <span className='font-bold'>{target?.id}</span>.
+                                {target?.name}</span> {isProduct ? 'product' : 'warehouse'} with an id of <span className='font-bold'>{target?.id}</span>.
                             </p>
                             <div className='flex flex-row-reverse mt-10'>
                                 <Button onClick={() => { onCancel() }} style={{ marginLeft: '7px' }} variant="outlined" color="error" >
