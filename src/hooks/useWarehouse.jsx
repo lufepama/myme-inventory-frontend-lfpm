@@ -6,7 +6,7 @@ import {
     createWarehouse, deleteWarehouse, createProductMultipleWarehouses, deleteProductMultipleWarehouses,
 
 } from '../helper/warehouse'
-import { deleteProductWarehouse, createProductWarehouse } from '../helper/product'
+import { deleteProductWarehouse, createProductWarehouse, updateAmountProduct } from '../helper/product'
 import { useModals } from './useModals'
 import { useProduct } from './useProduct'
 
@@ -149,6 +149,30 @@ export const useWarehouse = () => {
         setTemporalWarehouseList([])
     }
 
+    const updateProductAmount = async (newAmount) => {
+        const amount = parseInt(newAmount)
+        if (csrftoken) {
+            const filterdWrProduct = productsWarehouseList.filter(item => item.id === selectedProduct.id)[0]
+            const formatedData = {
+                wrProductId: filterdWrProduct.id,
+                amount: amount
+            }
+            const res = await updateAmountProduct(csrftoken, formatedData)
+            if (res.success) {
+                setProductsWarehouseList(
+                    productsWarehouseList.map(item => {
+                        if (item.id === selectedProduct.id) {
+                            return { ...item, product: { ...item.product, amount: amount } }
+                        } else {
+                            return item
+                        }
+                    })
+                )
+            }
+        }
+
+    }
+
     return {
         warehouseList,
         productsWarehouseList,
@@ -164,6 +188,7 @@ export const useWarehouse = () => {
         onAddDeleteProductMultipleWarehouse,
         onAddDeleteProductWarehouse,
         resetAlertMessages,
-        resetTemporalWarehouseList
+        resetTemporalWarehouseList,
+        updateProductAmount
     }
 }

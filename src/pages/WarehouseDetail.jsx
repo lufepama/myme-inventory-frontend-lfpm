@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import SidebarLayout from '../components/shared/SidebarLayout'
 import { useWarehouse } from '../hooks/useWarehouse'
-import ProductsTable from '../components/product/ProductsTable'
 import DeleteModal from '../components/shared/DeleteModal'
-import CreateProductModal from '../components/product/CreateProductModal'
 import { useProduct } from '../hooks/useProduct'
 import { useModals } from '../hooks/useModals'
 import ProductWarehouseTable from '../components/warehouse/ProductWarehouseTable'
 import CreateDeleteProductWarehouseModal from '../components/warehouse/CreateDeleteProductWarehouseModal'
+import UpdateProductAmountModal from '../components/warehouse/UpdateProductAmountModal'
 
 const WarehouseDetail = ({ params }) => {
 
-    const { fetchProductsWarehouse, onAddDeleteProductWarehouse, selectedWarehouse, productsWarehouseList } = useWarehouse()
-    const { handleCloseDeleteModal, handleCloseCreateDeleteProductWarehouseModal } = useModals()
+    const { fetchProductsWarehouse, onAddDeleteProductWarehouse, selectedWarehouse,
+        productsWarehouseList, updateProductAmount
+    } = useWarehouse()
+    const { handleCloseDeleteModal, handleCloseCreateDeleteProductWarehouseModal,
+        handleCloseUpdateProductAmountModal
+    } = useModals()
     const { selectedProduct, updateSelectedProduct } = useProduct()
 
     const handleCreateProductWarehouse = (amount) => {
-
         onAddDeleteProductWarehouse('Add', amount)
         handleCloseCreateDeleteProductWarehouseModal()
+    }
+
+    const handleUpdateProductAmount = (amount) => {
+        updateProductAmount(amount)
+        handleCloseUpdateProductAmountModal()
     }
 
     useEffect(() => {
@@ -30,6 +37,11 @@ const WarehouseDetail = ({ params }) => {
             <div className='flex flex-col pl-14 pr-14'>
                 <DeleteModal isProduct={selectedProduct} target={selectedProduct} onCancel={() => handleCloseDeleteModal()} onDelete={() => { onAddDeleteProductWarehouse('Del') }} />
                 <CreateDeleteProductWarehouseModal isCreate={true} onSubmit={handleCreateProductWarehouse} />
+                <UpdateProductAmountModal
+                    onCancel={() => { handleCloseUpdateProductAmountModal() }}
+                    onUpdate={handleUpdateProductAmount}
+                    target={selectedProduct}
+                />
                 <h1 className='font-bold text-3xl text-center'>Warehouse detail</h1>
                 <h1 className='-mb-5 mt-5 p-3 text-2xl font-semibold'>Warehouse info:</h1>
                 <div className='flex flex-row'>

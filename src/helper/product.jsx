@@ -39,6 +39,19 @@ export const createProductWarehouse = async (token, data) => {
         .catch((err) => { console.log(err) })
 }
 
+export const updateAmountProduct = async (token, data) => {
+    return fetch(`${API}/wareproduct/update-product-amount`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+        .then((res) => { return res.json() })
+        .catch((err) => { console.log(err) })
+}
+
 export const deleteProduct = async (token, productId) => {
     return fetch(`${API}/product/delete/${productId}`, {
         method: 'DELETE',

@@ -8,8 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import FilterInput from '../shared/FilterInput';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPen } from '@fortawesome/free-solid-svg-icons'
 import Button from '@mui/material/Button';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import Alert from '@mui/material/Alert';
@@ -41,7 +41,7 @@ function createmyData(id, name, description, price, amount) {
 
 export default function ProductWarehouseTable({ productList }) {
 
-    const { handleOpenDeleteModal, handleOpenCreateDeleteProductWarehouseModal } = useModals()
+    const { handleOpenDeleteModal, handleOpenCreateDeleteProductWarehouseModal, handleOpenUpdateProductAmountModal } = useModals()
     const { productStatus, updateSelectedProduct } = useProduct()
     const [rows, setRows] = useState([])
 
@@ -57,11 +57,14 @@ export default function ProductWarehouseTable({ productList }) {
         setRows(tempRows)
     }
 
-    //TODO: Add temporal item
     const handleDeleteProduct = (product) => {
         handleOpenDeleteModal()
         updateSelectedProduct(product)
-        // updateTemporalWarehouseList('Del')
+    }
+
+    const handleEditProductAmount = (product) => {
+        updateSelectedProduct(product)
+        handleOpenUpdateProductAmountModal()
     }
 
     useEffect(() => {
@@ -120,7 +123,11 @@ export default function ProductWarehouseTable({ productList }) {
                                     <StyledTableCell align="right">{row.amount}</StyledTableCell>
                                     <StyledTableCell align="right">
                                         <FontAwesomeIcon
-                                            className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
+                                            className='text-white text-lg text-blue-800 mr-5 cursor-pointer' icon={faPen}
+                                            onClick={() => handleEditProductAmount(row)}
+                                        />
+                                        <FontAwesomeIcon
+                                            className='text-white text-lg text-red-500 cursor-pointer' icon={faTrashAlt}
                                             onClick={() => handleDeleteProduct(row)}
                                         />
                                     </StyledTableCell>

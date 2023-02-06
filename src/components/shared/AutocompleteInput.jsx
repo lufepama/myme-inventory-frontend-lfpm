@@ -14,11 +14,13 @@ export default function AutocompleteInput({ productList, handleSeletedProductInp
                     '& input': {
                         width: '90%',
                         bgcolor: 'background.paper',
+                        paddingLeft: '12px',
                         color: (theme) =>
                             theme.palette.getContrastText(theme.palette.background.paper),
                     },
                 }}
                 id="custom-input-demo"
+
                 noOptionsText={`${productList.length == 0 ? 'Product list empty' : 'Product not found...'} `}
                 options={productList}
                 onChange={(e, value) => handleSeletedProductInput(value)}
@@ -32,7 +34,7 @@ export default function AutocompleteInput({ productList, handleSeletedProductInp
                 }}
                 renderInput={(params) => (
                     <div ref={params.InputProps.ref} className='flex flex-row items-center b'>
-                        <input ref={inputRef} type="text" {...params.inputProps} className='h-10 w-full' />
+                        <input placeholder={'Search product...'} ref={inputRef} type="text" {...params.inputProps} className='h-10 w-full' />
                         <SearchIcon className='font-bold w-20 h-20' />
                     </div>
                 )}

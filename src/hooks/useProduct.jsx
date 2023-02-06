@@ -71,6 +71,8 @@ export const useProduct = () => {
         })
     }
 
+
+
     return {
         productList,
         productStatus,

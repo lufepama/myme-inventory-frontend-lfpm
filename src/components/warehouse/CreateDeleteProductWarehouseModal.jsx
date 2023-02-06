@@ -6,9 +6,6 @@ import { faWarehouse } from '@fortawesome/free-solid-svg-icons'
 import TextField from '@mui/material/TextField';
 import { useModals } from '../../hooks/useModals';
 import Button from '@mui/material/Button';
-import FilterInput from '../shared/FilterInput';
-import Autocomplete from '@mui/material/Autocomplete';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useProduct } from '../../hooks/useProduct'
 import AutocompleteInput from '../../components/shared/AutocompleteInput'
 
@@ -29,7 +26,7 @@ const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
 
     //Destructuring  of neccesary data and methods
     const { openCreateDeleteProductWarehouseModal, handleCloseCreateDeleteProductWarehouseModal } = useModals()
-    const { productList, updateSelectedProduct } = useProduct()
+    const { productList, selectedProduct, updateSelectedProduct } = useProduct()
     const [productData, setProductData] = useState({
         id: '',
         name: '',
@@ -37,6 +34,7 @@ const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
         price: '',
         amount: 0
     })
+    const [isDisabled, setIsDisabled] = useState(true)
 
     const { id, name, description, price, amount } = productData
 
@@ -48,6 +46,7 @@ const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
 
     //Update selected product and fill input values according to selected product
     const handleSeletedProductInput = (product) => {
+        setIsDisabled(false)
         const prodData = {
             id: product.id,
             name: product.name,
@@ -57,6 +56,25 @@ const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
         }
         updateSelectedProduct(prodData)
         setProductData(prodData)
+    }
+
+    const resetProductData = () => {
+        setProductData({
+            id: '',
+            name: '',
+            description: '',
+            price: '',
+            amount: 0
+        })
+    }
+
+    const handleCreate = () => {
+        onSubmit(amount)
+        handleCloseCreateDeleteProductWarehouseModal()
+    }
+    const handleCancel = () => {
+        resetProductData()
+        handleCloseCreateDeleteProductWarehouseModal()
     }
 
     return (
@@ -144,15 +162,12 @@ const CreateDeleteProductWarehouseModal = ({ isCreate = false, onSubmit }) => {
                                 </div>
                             </div>
                             <div className='flex flex-row-reverse mt-10'>
-                                <Button onClick={() => {
-                                    handleCloseCreateDeleteProductWarehouseModal()
-                                }} variant="outlined" color="error">
+                                <Button onClick={() => handleCancel()} variant="outlined" color="error">
                                     Cancel
                                 </Button>
-                                <Button onClick={() => {
-                                    onSubmit(amount)
-                                    handleCloseCreateDeleteProductWarehouseModal()
-                                }} style={{ marginRight: '7px' }} variant="contained" color="primary">
+                                <Button disabled={isDisabled}
+                                    onClick={() => handleCreate()}
+                                    style={{ marginRight: '7px' }} variant="contained" color="primary">
                                     {
                                         isCreate ? 'Create' : 'Delete'
                                     }

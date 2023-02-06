@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import Checkbox from '@mui/material/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TableRow from '@mui/material/TableRow';
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { useWarehouse } from '../../hooks/useWarehouse';
 import { useModals } from '../../hooks/useModals';
 import { useLocation } from 'wouter';
@@ -74,7 +74,7 @@ const WarehouseCell = ({ row }) => {
             <StyledTableCell className='cursor-pointer' onClick={() => handleRedirect(row)} align="right">{row.phoneNumber}</StyledTableCell>
             <StyledTableCell align="right">
                 <FontAwesomeIcon
-                    className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
+                    className='text-white text-lg text-red-500 cursor-pointer' icon={faTrashAlt}
                     onClick={() => handleDeleteWarehouse(row)}
                 />
             </StyledTableCell>

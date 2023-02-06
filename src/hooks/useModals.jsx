@@ -6,7 +6,8 @@ export const useModals = () => {
     const { openDeleteModal, setOpenDeleteModal,
         openCreateProductModal, setOpenCreateProductModal,
         openCreateWarehouseModal, setOpenCreateWarehouseModal,
-        openCreateDeleteProductWarehouseModal, setOpenCreateDeleteProductWarehouseModal
+        openCreateDeleteProductWarehouseModal, setOpenCreateDeleteProductWarehouseModal,
+        openUpdateProductAmountModal, setOpenUpdateProductAmountModal
     }
         = useContext(DeleteModalContext)
 
@@ -22,12 +23,15 @@ export const useModals = () => {
     const handleOpenCreateDeleteProductWarehouseModal = () => setOpenCreateDeleteProductWarehouseModal(true)
     const handleCloseCreateDeleteProductWarehouseModal = () => setOpenCreateDeleteProductWarehouseModal(false)
 
+    const handleOpenUpdateProductAmountModal = () => setOpenUpdateProductAmountModal(true)
+    const handleCloseUpdateProductAmountModal = () => setOpenUpdateProductAmountModal(false)
 
     return {
         openDeleteModal,
         openCreateProductModal,
         openCreateWarehouseModal,
         openCreateDeleteProductWarehouseModal,
+        openUpdateProductAmountModal,
         handleOpenDeleteModal,
         handleCloseDeleteModal,
         handleOpenCreateProductModal,
@@ -35,6 +39,8 @@ export const useModals = () => {
         handleOpenCreateWarehouseModal,
         handleCloseCreateWarehouseModal,
         handleOpenCreateDeleteProductWarehouseModal,
-        handleCloseCreateDeleteProductWarehouseModal
+        handleCloseCreateDeleteProductWarehouseModal,
+        handleOpenUpdateProductAmountModal,
+        handleCloseUpdateProductAmountModal
     }
 }

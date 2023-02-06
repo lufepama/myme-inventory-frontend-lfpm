@@ -8,8 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import FilterInput from '../shared/FilterInput';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import Button from '@mui/material/Button';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import Alert from '@mui/material/Alert';
@@ -119,7 +118,7 @@ export default function ProductsTable({ productList }) {
                                     <StyledTableCell align="right">{row.price}</StyledTableCell>
                                     <StyledTableCell align="right">
                                         <FontAwesomeIcon
-                                            className='text-white text-2xl text-red-500 cursor-pointer' icon={faXmark}
+                                            className='text-white text-lg text-red-500 cursor-pointer' icon={faTrashAlt}
                                             onClick={() => handleDeleteProduct(row)}
                                         />
                                     </StyledTableCell>
