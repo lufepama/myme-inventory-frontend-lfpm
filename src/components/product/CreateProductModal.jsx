@@ -81,8 +81,8 @@ const CreateProductModal = () => {
                                     />
                                     <TextField
                                         placeholder='Description'
-                                        hidden={true}
-                                        name={description}
+                                        name='description'
+                                        value={description}
                                         onChange={handleChange('description')}
                                         className='bg-gray-200 rounded-md mt-3 w-full'
                                     />

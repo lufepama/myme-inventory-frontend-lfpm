@@ -13,7 +13,7 @@ export const useAuth = () => {
         isSignupLoading, setIsSignupLoading, isLoginLoading, setIsLoginLoading,
         fullName, setFullName
     } = useContext(AuthenticationContext)
-    const [location, navigate] = useLocation()
+    const [_, navigate] = useLocation()
 
     const csrftoken = Cookies.get('csrftoken')
 

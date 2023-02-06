@@ -5,16 +5,12 @@ import { useLocation } from 'wouter'
 
 const CustomButton = ({ text = '', url = null, iconUrl = null, onSubmit = null }) => {
 
-    const [location, navigate] = useLocation()
+    const [_, navigate] = useLocation()
 
 
     const handleClick = () => {
-        if (url) {
-            navigate(url)
-        }
-        if (onSubmit) {
-            onSubmit()
-        }
+        if (url) navigate(url)
+        if (onSubmit) onSubmit()
     }
 
     return (

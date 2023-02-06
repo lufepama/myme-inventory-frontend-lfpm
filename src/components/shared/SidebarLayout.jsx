@@ -10,7 +10,7 @@ import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { useProSidebar } from 'react-pro-sidebar'
 import { useAuth } from '../../hooks/useAuth';
 import logo from '../../assets/logo.png'
-import Link, { useLocation } from 'wouter'
+import { useLocation } from 'wouter'
 
 
 const SidebarLayout = ({ children }) => {
