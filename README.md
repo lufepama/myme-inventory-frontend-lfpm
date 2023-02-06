@@ -4,7 +4,8 @@ The project is built using Vite (https://vitejs.dev/).
 
 Steps to run the web locally: 
   1. npm install 
-  2. npm run dev
+  2. npm install vite
+  3. npm run dev
 
 The routes of the application are protected using a Higher Order Component. To start using the app, it is necessary to register and log in.
 
