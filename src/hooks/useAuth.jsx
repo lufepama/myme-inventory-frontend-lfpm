@@ -47,7 +47,7 @@ export const useAuth = () => {
         if (res.success) {
             saveUserDataCookies(res)
             setLoginStatus({ ...loginStatus, loginError: false, errorMessage: '' })
-            // navigate('/home/')
+            navigate('/home/')
             setIsLoginLoading(false)
         } else {
             setLoginStatus({ ...loginStatus, loginError: true, errorMessage: 'The password do not match' })

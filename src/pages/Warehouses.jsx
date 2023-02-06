@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import CreateDeleteProductWarehouseModal from '../components/warehouse/CreateDeleteProductWarehouseModal'
 import { useModals } from '../hooks/useModals'
 import { useProduct } from '../hooks/useProduct'
+import withAuthentication from '../hoc/withAuth'
 
 const Warehouses = () => {
 
@@ -69,4 +70,4 @@ const Warehouses = () => {
     )
 }
 
-export default Warehouses
+export default withAuthentication(Warehouses)

@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SidebarLayout from '../components/shared/SidebarLayout'
+import Cookies from 'js-cookie'
+import { useLocation } from 'wouter'
+import withAuthentication from '../hoc/withAuth'
 
 const Home = () => {
+
     return (
         <SidebarLayout>
             <div className='flex flex-col pl-14 pr-14'>
@@ -25,4 +29,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default withAuthentication(Home)

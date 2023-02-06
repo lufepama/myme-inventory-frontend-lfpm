@@ -5,6 +5,7 @@ import { useProduct } from '../hooks/useProduct'
 import DeleteModal from '../components/shared/DeleteModal'
 import CreateProductModal from '../components/product/CreateProductModal'
 import { useModals } from '../hooks/useModals'
+import withAuthentication from '../hoc/withAuth'
 
 const Products = () => {
 
@@ -32,4 +33,4 @@ const Products = () => {
     )
 }
 
-export default Products
+export default withAuthentication(Products)

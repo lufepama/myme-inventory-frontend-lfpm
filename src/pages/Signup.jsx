@@ -13,11 +13,11 @@ const Signup = () => {
     //**** Internal and external resources ****\\
     const { onSignup, signupStatus, isSignupLoading, handleSignupLoader } = useAuth()
     const [userData, setUserData] = useState({
-        username: 'test_',
-        name: 'test1',
-        lastName: 'test2',
-        pssw1: '1234add',
-        pssw2: '1234ad',
+        username: '',
+        name: '',
+        lastName: '',
+        pssw1: '',
+        pssw2: '',
         isPsswError: false,
         fieldsError: false,
         success: false
@@ -151,9 +151,7 @@ const Signup = () => {
                             }
                             {
                                 success && <Alert className='mt-4' severity="success">
-                                    Cuenta creada correctamente <Link href={'/login'}>
-                                        <p className='text-bold'>Go to login</p>
-                                    </Link>
+                                    Account created successfully
                                 </Alert>
                             }
                             {

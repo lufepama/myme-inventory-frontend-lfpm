@@ -7,6 +7,7 @@ import { useModals } from '../hooks/useModals'
 import ProductWarehouseTable from '../components/warehouse/ProductWarehouseTable'
 import CreateDeleteProductWarehouseModal from '../components/warehouse/CreateDeleteProductWarehouseModal'
 import UpdateProductAmountModal from '../components/warehouse/UpdateProductAmountModal'
+import withAuthentication from '../hoc/withAuth'
 
 const WarehouseDetail = ({ params }) => {
 
@@ -72,4 +73,4 @@ const WarehouseDetail = ({ params }) => {
     )
 }
 
-export default WarehouseDetail
+export default withAuthentication(WarehouseDetail)

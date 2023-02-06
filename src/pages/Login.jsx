@@ -12,8 +12,8 @@ const Login = () => {
 
     //**** Internal and external resources ****\\
     const [userData, setUserData] = useState({
-        username: 'test',
-        pssw: '1234',
+        username: '',
+        pssw: '',
         isPsswError: false,
         fieldsError: false,
     })
