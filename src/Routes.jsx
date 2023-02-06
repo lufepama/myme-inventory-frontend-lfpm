@@ -26,7 +26,7 @@ const Routes = () => {
                     <ProductProvider>
                         <ModalsProvider>
                             <Switch>
-                                <Route path='/home/' component={Home} />
+                                <Route path='/' component={Home} />
                                 <Route path='/products/' component={Products} />
                                 <Route path='/warehouses/' component={Warehouses} />
                                 <Route path='/warehouses/:id/' component={WarehouseDetail} />

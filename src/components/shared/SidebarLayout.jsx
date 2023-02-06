@@ -43,7 +43,7 @@ const SidebarLayout = ({ children }) => {
                                     height={100}
                                     className='rounded-3xl ml-3 cursor-pointer'
                                     alt='trading logo'
-                                    onClick={() => { navigate('/home/') }}
+                                    onClick={() => { navigate('/') }}
                                 />
                                 <MenuItem
                                     className='mt-5'
