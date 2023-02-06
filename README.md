@@ -28,7 +28,8 @@ Below, specific functionalities are outlined.
 ![image](https://user-images.githubusercontent.com/72669633/216876381-975e666f-df11-4d57-a098-bbd038e36593.png)
 
 6. Multiple products can be added and removed from stores. To do this, it is necessary to select them and click on 'Add product' or 'Delete product'.
-A modal will open where the product can be found based on its name. The 'Delete' and 'Add' buttons will become active when a product is selected
+A modal will open where the product can be found based on its name. The 'Delete' and 'Add' buttons will become active when a product is selected.
+If the product is already in the warehouse, its quantity will be updated according to the new amount value.
 
 ![image](https://user-images.githubusercontent.com/72669633/216876632-3b731073-fd5b-4962-8912-ead705205eb7.png)
 
