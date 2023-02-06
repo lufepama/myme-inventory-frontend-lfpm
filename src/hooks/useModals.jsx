@@ -1,8 +1,11 @@
 import React, { useEffect, useContext } from 'react'
 import DeleteModalContext from '../context/ModalsContext'
 
+//"This hook controls the opening and closing of modals utilized in the project
+
 export const useModals = () => {
 
+    //Destructuring states and setstates func from context
     const { openDeleteModal, setOpenDeleteModal,
         openCreateProductModal, setOpenCreateProductModal,
         openCreateWarehouseModal, setOpenCreateWarehouseModal,

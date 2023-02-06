@@ -11,19 +11,23 @@ import withAuthentication from '../hoc/withAuth'
 
 const WarehouseDetail = ({ params }) => {
 
-    const { fetchProductsWarehouse, onAddDeleteProductWarehouse, selectedWarehouse,
-        productsWarehouseList, updateProductAmount
+    //Destructuring methods and states
+    const { selectedWarehouse, productsWarehouseList, fetchProductsWarehouse,
+        onAddDeleteProductWarehouse, updateProductAmount
     } = useWarehouse()
     const { handleCloseDeleteModal, handleCloseCreateDeleteProductWarehouseModal,
         handleCloseUpdateProductAmountModal
     } = useModals()
     const { selectedProduct, updateSelectedProduct } = useProduct()
 
+
+    //Methods
     const handleCreateProductWarehouse = (amount) => {
         onAddDeleteProductWarehouse('Add', amount)
         handleCloseCreateDeleteProductWarehouseModal()
     }
 
+    //Manages the updating of product quantity
     const handleUpdateProductAmount = (amount) => {
         updateProductAmount(amount)
         handleCloseUpdateProductAmountModal()

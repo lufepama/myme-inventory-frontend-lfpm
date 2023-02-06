@@ -9,6 +9,7 @@ import { useWarehouse } from './useWarehouse'
 
 export const useProduct = () => {
 
+    //Destructuring data from context
     const { productList, setProductList,
         productStatus, setProductStatus,
         selectedProduct, setSelectedProduct
@@ -16,6 +17,8 @@ export const useProduct = () => {
     const { handleCloseCreateProductModal, handleCloseDeleteModal } = useModals()
 
     const csrftoken = Cookies.get('csrftoken')
+
+    //Methods
 
     const fetchProducts = async () => {
         if (csrftoken) {
@@ -70,7 +73,6 @@ export const useProduct = () => {
             isDeleted: false
         })
     }
-
 
 
     return {

@@ -13,6 +13,7 @@ import { useProduct } from './useProduct'
 
 export const useWarehouse = () => {
 
+    //Destructuring data
     const { warehouseList, setWarehouseList,
         productsWarehouseList, setProductsWarehouseList,
         selectedWarehouse, setSelectedWarehouse,
@@ -24,6 +25,7 @@ export const useWarehouse = () => {
 
     const csrftoken = Cookies.get('csrftoken')
 
+    //Methods
     const fetchProductsWarehouse = async (warehouseId) => {
         const csrftoken = Cookies.get('csrftoken')
         if (csrftoken) {

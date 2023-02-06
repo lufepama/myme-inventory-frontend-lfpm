@@ -10,14 +10,13 @@ import { Link } from 'wouter';
 
 const Login = () => {
 
-    //**** Internal and external resources ****\\
+    //Setup state
     const [userData, setUserData] = useState({
         username: '',
         pssw: '',
         isPsswError: false,
         fieldsError: false,
     })
-
     const { onLogin, loginStatus, setLoginStatus, isLoginLoading, handleLoginLoader } = useAuth()
 
     const { loginError, errorMessage } = loginStatus
@@ -30,7 +29,7 @@ const Login = () => {
         };
 
 
-    //**** Methods *****\\
+    //Methods
     const areFieldsFilled = () => {
         if (!username || !pssw) {
             setUserData({ ...userData, fieldsError: true })
@@ -39,6 +38,7 @@ const Login = () => {
         return true
     }
 
+    //Handles submit click 
     const onSubmit = async () => {
         setUserData({ ...userData, isPsswError: false, fieldsError: false })
         setLoginStatus({ ...loginStatus, loginError: false })
@@ -50,6 +50,7 @@ const Login = () => {
     }
 
     useEffect(() => {
+        //Reset loader to false if no errors
         if (!loginError || !fieldsError) {
             handleLoginLoader(false)
         }

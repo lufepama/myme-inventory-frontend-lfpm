@@ -25,7 +25,7 @@ const Signup = () => {
     const { username, name, lastName, pssw1, pssw2, isPsswError, fieldsError, success } = userData
     const { signupError, errorMessage } = signupStatus
 
-    //**** Methods *****\\
+    //Methods
 
     //Validate if psswds are the same
     const validatePswds = () => {
@@ -51,6 +51,7 @@ const Signup = () => {
             setUserData({ ...userData, [name]: event.target.value })
         };
 
+    //Handles submit btn click
     const onSubmit = async () => {
         setUserData({ ...userData, isPsswError: false, fieldsError: false, success: false })
         const arePwdsEquals = validatePswds()
@@ -73,6 +74,7 @@ const Signup = () => {
     }
 
     useEffect(() => {
+        //Reset loader to false if no errors
         if (!isPsswError || !fieldsError || !signupError) {
             handleSignupLoader(false)
         }
